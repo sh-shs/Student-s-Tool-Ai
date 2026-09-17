@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — Student's Tool & AI</title>
-  <meta name="description" content="Log in to your Student's Tool & AI account.">
+  <title>Sign In — Student's Tool & AI</title>
+  <meta name="description" content="Sign in to your Student's Tool & AI account.">
   <link rel="icon" type="image/png" href="../assets/images/logo-icon.png">
 
   <link rel="stylesheet" href="../css/variables.css">
@@ -16,7 +16,7 @@
 
   <script src="../js/theme.js"></script>
 </head>
-<body>
+<body class="login-page-body">
   <header class="site-header">
     <div class="container">
       <nav class="navbar" aria-label="Main Navigation">
@@ -55,32 +55,84 @@
     </div>
   </header>
 
-  <main class="section">
-    <div class="container" style="max-width: 28rem;">
-      <div class="section-header">
-        <h1 class="section-title">Sign In</h1>
-        <p class="section-desc">Access your saved settings and tools history.</p>
+  <main class="login-wrapper-section">
+    <div class="login-card">
+      <h1 class="login-title">Sign in to your account</h1>
+
+      <!-- Google Sign In Button -->
+      <button type="button" class="btn-google" id="btn-google-login">
+        <svg class="google-icon" width="20" height="20" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Sign in with Google</span>
+      </button>
+
+      <!-- Divider -->
+      <div class="login-divider">
+        <span class="divider-text">OR WITH EMAIL</span>
       </div>
 
-      <div class="card" style="padding: 2rem;">
-        <form onsubmit="event.preventDefault(); alert('Authentication feature will be available in a future phase.');">
-          <div style="margin-bottom: 1.25rem;">
-            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;" for="login-email">Email Address</label>
-            <input type="email" id="login-email" required style="width: 100%; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--input-border); background: var(--input-bg); color: var(--text-main);">
+      <!-- Login Form -->
+      <form id="login-form" novalidate>
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="login-email" class="form-label">Email Address <span class="required-star">*</span></label>
+          <div class="input-with-icon">
+            <span class="input-icon left-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </span>
+            <input type="email" id="login-email" class="form-input" placeholder="name@domain.com" autocomplete="email">
           </div>
+          <span class="error-message" id="email-error" aria-live="polite"></span>
+        </div>
 
-          <div style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;" for="login-password">Password</label>
-            <input type="password" id="login-password" required style="width: 100%; padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--input-border); background: var(--input-bg); color: var(--text-main);">
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="login-password" class="form-label">Password <span class="required-star">*</span></label>
+          <div class="input-with-icon">
+            <span class="input-icon left-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </span>
+            <input type="password" id="login-password" class="form-input" placeholder="******" autocomplete="current-password">
+            <button type="button" class="password-toggle-btn" id="password-toggle" aria-label="Show password">
+              <svg class="eye-icon eye-show" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <svg class="eye-icon eye-hide hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+            </button>
           </div>
+          <span class="error-message" id="password-error" aria-live="polite"></span>
+        </div>
 
-          <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Sign In</button>
-        </form>
+        <!-- Submit Button -->
+        <button type="submit" class="btn-login-submit" id="btn-login-submit">
+          <span class="btn-text">Login</span>
+          <span class="btn-spinner hidden" aria-hidden="true"></span>
+        </button>
+      </form>
 
-        <p style="text-align: center; font-size: 0.9rem;">
-          Don't have an account? <a href="../signup/index.html">Sign Up</a>
+      <!-- Account Links -->
+      <div class="login-links">
+        <p class="signup-prompt">
+          Don't have an account? <a href="../signup/index.html" class="link-orange">Sign Up</a>
         </p>
+        <div class="forgot-password-wrapper">
+          <a href="#" class="forgot-password-link" onclick="event.preventDefault(); alert('Password reset link sent if account exists.');">Forgot Password?</a>
+        </div>
       </div>
+
+      <!-- Mobile OTP Login (Disabled) -->
+      <div class="otp-login-section">
+        <button type="button" class="btn-otp-disabled" disabled>
+          <div class="otp-btn-left">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            <span>Mobile OTP Login</span>
+          </div>
+          <span class="badge-orange">COMING SOON</span>
+        </button>
+      </div>
+
     </div>
   </main>
 
@@ -117,5 +169,107 @@
 
   <script src="../js/navigation.js"></script>
   <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const loginForm = document.getElementById('login-form');
+      const emailInput = document.getElementById('login-email');
+      const passwordInput = document.getElementById('login-password');
+      const emailError = document.getElementById('email-error');
+      const passwordError = document.getElementById('password-error');
+      const passwordToggleBtn = document.getElementById('password-toggle');
+      const eyeShowIcon = passwordToggleBtn ? passwordToggleBtn.querySelector('.eye-show') : null;
+      const eyeHideIcon = passwordToggleBtn ? passwordToggleBtn.querySelector('.eye-hide') : null;
+      const submitBtn = document.getElementById('btn-login-submit');
+      const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+      const btnSpinner = submitBtn ? submitBtn.querySelector('.btn-spinner') : null;
+      const googleBtn = document.getElementById('btn-google-login');
+
+      // Password visibility toggle
+      if (passwordToggleBtn && passwordInput) {
+        passwordToggleBtn.addEventListener('click', function() {
+          const isPassword = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+          passwordToggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+          if (eyeShowIcon && eyeHideIcon) {
+            eyeShowIcon.classList.toggle('hidden', isPassword);
+            eyeHideIcon.classList.toggle('hidden', !isPassword);
+          }
+        });
+      }
+
+      // Input clear errors on typing
+      if (emailInput) {
+        emailInput.addEventListener('input', function() {
+          emailInput.classList.remove('input-error');
+          if (emailError) emailError.textContent = '';
+        });
+      }
+
+      if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+          passwordInput.classList.remove('input-error');
+          if (passwordError) passwordError.textContent = '';
+        });
+      }
+
+      // Google Login mock button handler
+      if (googleBtn) {
+        googleBtn.addEventListener('click', function() {
+          alert('Google Sign-In integration will be configured in backend phase.');
+        });
+      }
+
+      // Form validation & submission
+      if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          let isValid = true;
+          const emailVal = emailInput ? emailInput.value.trim() : '';
+          const passwordVal = passwordInput ? passwordInput.value : '';
+
+          // Reset error states
+          if (emailInput) emailInput.classList.remove('input-error');
+          if (passwordInput) passwordInput.classList.remove('input-error');
+          if (emailError) emailError.textContent = '';
+          if (passwordError) passwordError.textContent = '';
+
+          // Validate email
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailVal) {
+            isValid = false;
+            if (emailInput) emailInput.classList.add('input-error');
+            if (emailError) emailError.textContent = 'Please enter your email address.';
+          } else if (!emailPattern.test(emailVal)) {
+            isValid = false;
+            if (emailInput) emailInput.classList.add('input-error');
+            if (emailError) emailError.textContent = 'Please enter a valid email format (e.g. name@domain.com).';
+          }
+
+          // Validate password
+          if (!passwordVal) {
+            isValid = false;
+            if (passwordInput) passwordInput.classList.add('input-error');
+            if (passwordError) passwordError.textContent = 'Please enter your password.';
+          }
+
+          if (!isValid) return;
+
+          // Set Loading state
+          if (submitBtn) submitBtn.disabled = true;
+          if (btnText) btnText.textContent = 'Logging in...';
+          if (btnSpinner) btnSpinner.classList.remove('hidden');
+
+          // Mock authentication API delay
+          setTimeout(function() {
+            if (btnText) btnText.textContent = 'Login';
+            if (btnSpinner) btnSpinner.classList.add('hidden');
+            if (submitBtn) submitBtn.disabled = false;
+            alert('Logged in successfully (Mock response)!');
+          }, 1800);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
