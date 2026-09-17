@@ -122,19 +122,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (noToolsMessage) noToolsMessage.style.display = 'none';
     toolsGrid.style.display = 'grid';
 
+    // Helper function to map category name to badge class
+    const getBadgeClass = (cat) => {
+      switch (cat) {
+        case 'Academic': return 'badge-academic';
+        case 'Math': return 'badge-math';
+        case 'Time & Date': return 'badge-time';
+        case 'Productivity': return 'badge-prod';
+        case 'Text': return 'badge-text';
+        case 'Image & File': return 'badge-image';
+        default: return 'badge-other';
+      }
+    };
+
     // Generate Card HTML
     toolsGrid.innerHTML = filtered.map(tool => {
       const isFav = favorites.includes(tool.id);
+      const primaryCategory = tool.categories[0] || 'Other';
+
       return `
-        <div class="card tool-card" data-tool-id="${tool.id}">
+        <div class="card tool-card" data-tool-id="${tool.id}" data-category-theme="${primaryCategory}">
           <button class="fav-toggle-btn ${isFav ? 'active' : ''}" data-tool-id="${tool.id}" aria-label="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="${isFav ? '#f59e0b' : 'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </button>
-          <div class="card-icon">${tool.icon}</div>
-          <div class="tool-card-categories">
-            ${tool.categories.map(c => `<span class="badge badge-sm">${c}</span>`).join(' ')}
+          <div class="card-icon" title="${tool.name}">
+            ${tool.icon}
           </div>
-          <h3 class="card-title">${tool.name}</h3>
+          <div class="tool-card-categories">
+            ${tool.categories.map(c => `<span class="badge badge-sm ${getBadgeClass(c)}">${c}</span>`).join(' ')}
+          </div>
+          <h3 class="card-title">${tool.emoji ? tool.emoji + ' ' : ''}${tool.name}</h3>
           <p class="card-desc">${tool.description}</p>
           <a href="${tool.url}" class="btn btn-outline btn-sm tool-use-btn" data-tool-id="${tool.id}">Use Tool &rarr;</a>
         </div>
