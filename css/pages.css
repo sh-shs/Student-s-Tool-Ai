@@ -233,3 +233,123 @@
   background-color: rgba(255, 255, 255, 0.15);
   border-color: #ffffff;
 }
+
+/* Tools Directory Filtering & Search Bar */
+.tools-filter-wrapper {
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.tools-search-box {
+  position: relative;
+  max-width: 36rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tools-search-box input {
+  padding-left: 3rem;
+  padding-right: 1rem;
+  height: 3.25rem;
+  font-size: 1rem;
+  border-radius: var(--radius-lg);
+}
+
+.tools-search-box svg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.category-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.filter-btn:hover {
+  border-color: var(--border-brand);
+  color: var(--primary-400);
+}
+
+.filter-btn.active {
+  background-color: var(--bg-accent-subtle);
+  border-color: var(--border-brand);
+  color: var(--primary-400);
+  font-weight: 600;
+}
+
+.empty-state-card {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  background-color: var(--bg-surface);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  max-width: 36rem;
+  margin: 2rem auto;
+}
+
+.empty-state-card svg {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.empty-state-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Tool Explainer Section */
+.tool-explainer {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.tool-explainer h2 {
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.tool-explainer p, .tool-explainer ul {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.related-tools-section {
+  margin-top: 3.5rem;
+}
+
+.related-tools-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}

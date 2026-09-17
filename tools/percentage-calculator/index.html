@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Percentage Calculator — Student's Tool & AI</title>
-  <meta name="description" content="Calculate your semester GPA with course credits and letter grades.">
+  <meta name="description" content="Quickly calculate percentage of numbers, percentage change, markup, and test score mark ratios online.">
   <link rel="icon" type="image/png" href="/assets/images/logo-icon.png">
 
   <link rel="stylesheet" href="/css/variables.css">
@@ -23,7 +23,6 @@
         <a href="/" class="brand-logo" aria-label="Student's Tool & AI Home">
           <img src="/assets/images/logo-horizontal.png" alt="Student's Tool & AI Logo">
         </a>
-
         <ul class="nav-menu" id="nav-menu">
           <li><a href="/" class="nav-link">Home</a></li>
           <li><a href="/ai" class="nav-link">AI Assistant</a></li>
@@ -31,13 +30,11 @@
           <li><a href="/about" class="nav-link">About</a></li>
           <li><a href="/contact" class="nav-link">Contact</a></li>
         </ul>
-
         <div class="header-actions">
           <a href="/login" class="btn btn-outline btn-sm">Login</a>
-
           <div class="theme-toggle-wrapper">
             <button class="theme-toggle-btn" id="theme-toggle-btn" aria-expanded="false" aria-haspopup="true" aria-label="Toggle theme settings">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
               <span id="current-theme-label">Theme</span>
             </button>
             <div class="theme-dropdown" id="theme-dropdown">
@@ -46,7 +43,6 @@
               <button class="theme-option-btn" data-theme-val="system">System</button>
             </div>
           </div>
-
           <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
@@ -56,19 +52,115 @@
   </header>
 
   <main class="section">
-    <div class="container" style="max-width: 48rem;">
-      <div class="section-header">
-        <span class="badge" style="margin-bottom: 1rem;">Phase 02 Feature</span>
-        <h1 class="section-title">Percentage Calculator</h1>
-        <p class="section-desc">Calculate your grade point average instantly.</p>
+    <div class="container" style="max-width: 52rem;">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-separator">&rsaquo;</span>
+        <a href="/tools">Tools</a>
+        <span class="breadcrumb-separator">&rsaquo;</span>
+        <a href="/tools?category=Academic">Academic</a>
+        <span class="breadcrumb-separator">&rsaquo;</span>
+        <span class="breadcrumb-current">Percentage Calculator</span>
+      </nav>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h1 style="font-size: 2rem; font-weight: 700;">Percentage Calculator</h1>
+          <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.25rem;">Solve percentage problems, test mark ratios, and percentage differences.</p>
+        </div>
+        <button id="fav-btn" class="btn btn-outline btn-sm" aria-label="Toggle Favorite">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span id="fav-btn-text">Favorite</span>
+        </button>
       </div>
 
-      <div class="card" style="padding: 2rem;">
-        <div class="info-notice">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span>Interactive Percentage Calculator logic will be released in Phase 02.</span>
+      <div class="card" style="padding: 2rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+        <!-- Mode 1: What is X% of Y? -->
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary-400);">1. What is X% of Y?</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Percentage (X %)</label>
+              <input type="number" id="p1-x" class="form-control" value="20" step="any">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Total Value (Y)</label>
+              <input type="number" id="p1-y" class="form-control" value="150" step="any">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Result</label>
+              <input type="text" id="p1-res" class="form-control" readonly style="font-weight: 700; color: var(--primary-400);">
+            </div>
+          </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-color);">
+
+        <!-- Mode 2: X is what % of Y? -->
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary-400);">2. X is what % of Y?</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Obtained Value (X)</label>
+              <input type="number" id="p2-x" class="form-control" value="45" step="any">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Total Value (Y)</label>
+              <input type="number" id="p2-y" class="form-control" value="60" step="any">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Result (%)</label>
+              <input type="text" id="p2-res" class="form-control" readonly style="font-weight: 700; color: var(--primary-400);">
+            </div>
+          </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--border-color);">
+
+        <!-- Mode 3: Percentage Increase / Decrease -->
+        <div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary-400);">3. Percentage Increase / Decrease</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Initial Value (X)</label>
+              <input type="number" id="p3-x" class="form-control" value="80" step="any">
+            </div>
+            <div class="form-group">
+              <label class="form-label">New Value (Y)</label>
+              <input type="number" id="p3-y" class="form-control" value="100" step="any">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Change (%)</label>
+              <input type="text" id="p3-res" class="form-control" readonly style="font-weight: 700; color: var(--primary-400);">
+            </div>
+          </div>
         </div>
       </div>
+
+      <section class="tool-explainer">
+        <h2>How It Works</h2>
+        <p>1. Percentage of total: <code>Result = (X / 100) * Y</code></p>
+        <p>2. Part to whole ratio: <code>Percentage = (X / Y) * 100</code></p>
+        <p>3. Percentage difference: <code>Change = ((Y - X) / X) * 100</code></p>
+      </section>
+
+      <section class="related-tools-section">
+        <h3 class="related-tools-title">Related Tools</h3>
+        <div class="grid-3">
+          <div class="card" style="padding: 1.25rem;">
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Marks Calculator</h4>
+            <a href="/tools/marks-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+          <div class="card" style="padding: 1.25rem;">
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Grade Calculator</h4>
+            <a href="/tools/grade-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+          <div class="card" style="padding: 1.25rem;">
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">GPA Calculator</h4>
+            <a href="/tools/gpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -103,7 +195,63 @@
     </div>
   </footer>
 
+  <script src="/js/tools-data.js"></script>
+  <script src="/js/tools-app.js"></script>
   <script src="/js/navigation.js"></script>
   <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toolId = 'percentage-calculator';
+      const favBtn = document.getElementById('fav-btn');
+      const favBtnText = document.getElementById('fav-btn-text');
+
+      function updateFavUI() {
+        if (window.ToolsStorage && window.ToolsStorage.isFavorite(toolId)) {
+          favBtnText.textContent = 'Favorited';
+          favBtn.querySelector('svg').setAttribute('fill', 'currentColor');
+          favBtn.classList.add('active');
+        } else {
+          favBtnText.textContent = 'Favorite';
+          favBtn.querySelector('svg').setAttribute('fill', 'none');
+          favBtn.classList.remove('active');
+        }
+      }
+      if (favBtn) {
+        updateFavUI();
+        favBtn.addEventListener('click', () => {
+          if (window.ToolsStorage) {
+            window.ToolsStorage.toggleFavorite(toolId);
+            updateFavUI();
+          }
+        });
+      }
+
+      function calcP1() {
+        const x = parseFloat(document.getElementById('p1-x').value) || 0;
+        const y = parseFloat(document.getElementById('p1-y').value) || 0;
+        document.getElementById('p1-res').value = ((x / 100) * y).toFixed(2);
+      }
+
+      function calcP2() {
+        const x = parseFloat(document.getElementById('p2-x').value) || 0;
+        const y = parseFloat(document.getElementById('p2-y').value) || 0;
+        document.getElementById('p2-res').value = y !== 0 ? ((x / y) * 100).toFixed(2) + '%' : '0%';
+      }
+
+      function calcP3() {
+        const x = parseFloat(document.getElementById('p3-x').value) || 0;
+        const y = parseFloat(document.getElementById('p3-y').value) || 0;
+        if (x === 0) { document.getElementById('p3-res').value = '0%'; return; }
+        const diff = ((y - x) / x) * 100;
+        document.getElementById('p3-res').value = (diff >= 0 ? '+' : '') + diff.toFixed(2) + '%';
+      }
+
+      ['p1-x', 'p1-y'].forEach(id => document.getElementById(id).addEventListener('input', calcP1));
+      ['p2-x', 'p2-y'].forEach(id => document.getElementById(id).addEventListener('input', calcP2));
+      ['p3-x', 'p3-y'].forEach(id => document.getElementById(id).addEventListener('input', calcP3));
+
+      calcP1(); calcP2(); calcP3();
+    });
+  </script>
 </body>
 </html>

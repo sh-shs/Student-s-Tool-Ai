@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GPA Calculator — Student's Tool & AI</title>
-  <meta name="description" content="Calculate your term or semester Grade Point Average (GPA) instantly with customizable course credits and letter grades.">
+  <title>Equation Solver — Student's Tool & AI</title>
+  <meta name="description" content="Solve linear (ax + b = 0) and quadratic (ax² + bx + c = 0) algebraic equations with real and complex roots.">
   <link rel="icon" type="image/png" href="/assets/images/logo-icon.png">
 
   <link rel="stylesheet" href="/css/variables.css">
@@ -17,7 +17,6 @@
   <script src="/js/theme.js"></script>
 </head>
 <body>
-  <!-- Header -->
   <header class="site-header">
     <div class="container">
       <nav class="navbar" aria-label="Main Navigation">
@@ -52,24 +51,22 @@
     </div>
   </header>
 
-  <!-- Main Content -->
   <main class="section">
     <div class="container" style="max-width: 52rem;">
-      <!-- Breadcrumb -->
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="breadcrumb-separator">&rsaquo;</span>
         <a href="/tools">Tools</a>
         <span class="breadcrumb-separator">&rsaquo;</span>
-        <a href="/tools?category=Academic">Academic</a>
+        <a href="/tools?category=Math">Math</a>
         <span class="breadcrumb-separator">&rsaquo;</span>
-        <span class="breadcrumb-current">GPA Calculator</span>
+        <span class="breadcrumb-current">Equation Solver</span>
       </nav>
 
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <h1 style="font-size: 2rem; font-weight: 700;">GPA Calculator</h1>
-          <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.25rem;">Calculate your term or semester Grade Point Average quickly and accurately.</p>
+          <h1 style="font-size: 2rem; font-weight: 700;">Equation Solver</h1>
+          <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.25rem;">Solve linear and quadratic equations with detailed step analysis.</p>
         </div>
         <button id="fav-btn" class="btn btn-outline btn-sm" aria-label="Toggle Favorite">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -78,72 +75,90 @@
       </div>
 
       <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-        <form id="gpa-form" onsubmit="return false;">
-          <div id="course-rows">
-            <!-- Course rows populated dynamically -->
+        <form id="eq-form" onsubmit="return false;">
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="form-label" for="eq-type">Select Equation Type</label>
+            <select id="eq-type" class="form-select">
+              <option value="quadratic">Quadratic Equation (ax² + bx + c = 0)</option>
+              <option value="linear">Linear Equation (ax + b = 0)</option>
+            </select>
           </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 1rem;">
-            <button type="button" id="add-course-btn" class="btn btn-secondary btn-sm">+ Add Course</button>
-            <div class="form-actions" style="margin-top: 0;">
-              <button type="button" id="reset-btn" class="btn btn-outline">Reset</button>
-              <button type="button" id="calc-btn" class="btn btn-primary">Calculate GPA</button>
+          <!-- Coefficients for Quadratic -->
+          <div id="quad-fields" class="form-row">
+            <div class="form-group">
+              <label class="form-label">a (x² coefficient)</label>
+              <input type="number" id="coeff-a" class="form-control" value="1" step="any">
             </div>
+            <div class="form-group">
+              <label class="form-label">b (x coefficient)</label>
+              <input type="number" id="coeff-b" class="form-control" value="-5" step="any">
+            </div>
+            <div class="form-group">
+              <label class="form-label">c (constant)</label>
+              <input type="number" id="coeff-c" class="form-control" value="6" step="any">
+            </div>
+          </div>
+
+          <!-- Coefficients for Linear -->
+          <div id="lin-fields" class="form-row" style="display: none;">
+            <div class="form-group">
+              <label class="form-label">a (x coefficient)</label>
+              <input type="number" id="lin-a" class="form-control" value="2" step="any">
+            </div>
+            <div class="form-group">
+              <label class="form-label">b (constant)</label>
+              <input type="number" id="lin-b" class="form-control" value="-8" step="any">
+            </div>
+          </div>
+
+          <div class="form-actions" style="margin-top: 1.5rem;">
+            <button type="button" id="calc-btn" class="btn btn-primary">Solve Equation</button>
           </div>
         </form>
 
-        <!-- Result Box -->
         <div id="result-box" class="tool-result-card" style="display: none;">
-          <div class="result-title">GPA Summary</div>
-          <div class="result-grid">
+          <div class="result-title">Equation Solution</div>
+          <div class="result-grid" id="result-grid">
             <div class="result-stat">
-              <div class="result-value" id="res-gpa">0.00</div>
-              <div class="result-label">Semester GPA</div>
+              <div class="result-value" id="res-x1">x₁ = 3</div>
+              <div class="result-label">First Root / Solution</div>
             </div>
-            <div class="result-stat">
-              <div class="result-value" id="res-credits">0</div>
-              <div class="result-label">Total Credits</div>
-            </div>
-            <div class="result-stat">
-              <div class="result-value" id="res-points">0.00</div>
-              <div class="result-label">Grade Points</div>
+            <div class="result-stat" id="res-x2-box">
+              <div class="result-value" id="res-x2">x₂ = 2</div>
+              <div class="result-label">Second Root</div>
             </div>
           </div>
+          <p id="res-disc-info" style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;"></p>
         </div>
       </div>
 
-      <!-- How it works -->
       <section class="tool-explainer">
         <h2>How It Works</h2>
-        <p>Your Semester GPA is calculated by multiplying the numerical point value of each letter grade by the course credit hours to get total grade points, then dividing the sum of grade points by total credit hours attempted.</p>
-        <p style="margin-top: 0.5rem;">Standard 4.0 Scale Grade Values: A (4.0), A- (3.7), B+ (3.3), B (3.0), B- (2.7), C+ (2.3), C (2.0), C- (1.7), D+ (1.3), D (1.0), F (0.0).</p>
+        <p><strong>Linear Equation:</strong> <code>x = -b / a</code></p>
+        <p><strong>Quadratic Equation:</strong> Uses the quadratic formula <code>x = (-b ± √(b² - 4ac)) / 2a</code>. Discriminant <code>D = b² - 4ac</code> determines whether roots are real or complex.</p>
       </section>
 
-      <!-- Related Tools -->
       <section class="related-tools-section">
-        <h3 class="related-tools-title">Related Academic Tools</h3>
+        <h3 class="related-tools-title">Related Math Tools</h3>
         <div class="grid-3">
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">CGPA Calculator</h4>
-            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">Calculate cumulative overall GPA across multiple terms.</p>
-            <a href="/tools/cgpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Scientific Calculator</h4>
+            <a href="/tools/scientific-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Semester GPA Calculator</h4>
-            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">Detailed semester grade point distribution analysis.</p>
-            <a href="/tools/semester-gpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Fraction Calculator</h4>
+            <a href="/tools/fraction-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Grade Calculator</h4>
-            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">Calculate weighted assessment and assignment final grades.</p>
-            <a href="/tools/grade-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Average Calculator</h4>
+            <a href="/tools/average-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
         </div>
       </section>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -181,21 +196,15 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const toolId = 'gpa-calculator';
-      const courseRows = document.getElementById('course-rows');
-      const addCourseBtn = document.getElementById('add-course-btn');
+      const toolId = 'equation-solver';
+      const eqType = document.getElementById('eq-type');
+      const quadFields = document.getElementById('quad-fields');
+      const linFields = document.getElementById('lin-fields');
       const calcBtn = document.getElementById('calc-btn');
-      const resetBtn = document.getElementById('reset-btn');
       const resultBox = document.getElementById('result-box');
       const favBtn = document.getElementById('fav-btn');
       const favBtnText = document.getElementById('fav-btn-text');
 
-      const gradeScale = {
-        'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7,
-        'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'F': 0.0
-      };
-
-      // Favorite setup
       function updateFavUI() {
         if (window.ToolsStorage && window.ToolsStorage.isFavorite(toolId)) {
           favBtnText.textContent = 'Favorited';
@@ -217,76 +226,62 @@
         });
       }
 
-      function addRow(name = '', credits = '3', grade = 'A') {
-        const row = document.createElement('div');
-        row.className = 'form-row course-row';
-        row.style.marginBottom = '0.75rem';
-        row.innerHTML = `
-          <div style="flex: 2;">
-            <input type="text" class="form-control course-name" placeholder="Course Name (optional)" value="${name}">
-          </div>
-          <div style="flex: 1;">
-            <input type="number" class="form-control course-credits" placeholder="Credits" min="0.5" step="0.5" value="${credits}">
-          </div>
-          <div style="flex: 1;">
-            <select class="form-select course-grade">
-              ${Object.keys(gradeScale).map(g => `<option value="${g}" ${g === grade ? 'selected' : ''}>${g} (${gradeScale[g].toFixed(1)})</option>`).join('')}
-            </select>
-          </div>
-          <div style="display: flex; align-items: center;">
-            <button type="button" class="btn btn-outline remove-row-btn" aria-label="Remove Course" style="padding: 0.65rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">&times;</button>
-          </div>
-        `;
-        courseRows.appendChild(row);
-      }
-
-      // Initial rows
-      addRow('Course 1', '3', 'A');
-      addRow('Course 2', '3', 'B+');
-      addRow('Course 3', '4', 'A-');
-      addRow('Course 4', '3', 'B');
-
-      addCourseBtn.addEventListener('click', () => addRow(`Course ${courseRows.children.length + 1}`, '3', 'A'));
-
-      courseRows.addEventListener('click', (e) => {
-        if (e.target.classList.contains('remove-row-btn')) {
-          if (courseRows.children.length > 1) {
-            e.target.closest('.course-row').remove();
-          }
+      eqType.addEventListener('change', () => {
+        if (eqType.value === 'quadratic') {
+          quadFields.style.display = 'grid';
+          linFields.style.display = 'none';
+        } else {
+          quadFields.style.display = 'none';
+          linFields.style.display = 'grid';
         }
+        resultBox.style.display = 'none';
       });
 
       calcBtn.addEventListener('click', () => {
-        let totalCredits = 0;
-        let totalPoints = 0;
+        const type = eqType.value;
+        const resX1 = document.getElementById('res-x1');
+        const resX2 = document.getElementById('res-x2');
+        const resX2Box = document.getElementById('res-x2-box');
+        const discInfo = document.getElementById('res-disc-info');
 
-        const rows = courseRows.querySelectorAll('.course-row');
-        rows.forEach(row => {
-          const credits = parseFloat(row.querySelector('.course-credits').value) || 0;
-          const grade = row.querySelector('.course-grade').value;
-          const pointVal = gradeScale[grade] !== undefined ? gradeScale[grade] : 0;
+        if (type === 'linear') {
+          const a = parseFloat(document.getElementById('lin-a').value) || 0;
+          const b = parseFloat(document.getElementById('lin-b').value) || 0;
+          if (a === 0) { alert('Coefficient a cannot be 0.'); return; }
+          const x = -b / a;
+          resX1.textContent = `x = ${x.toFixed(4)}`;
+          resX2Box.style.display = 'none';
+          discInfo.textContent = 'Linear equation solution calculated directly.';
+        } else {
+          const a = parseFloat(document.getElementById('coeff-a').value) || 0;
+          const b = parseFloat(document.getElementById('coeff-b').value) || 0;
+          const c = parseFloat(document.getElementById('coeff-c').value) || 0;
 
-          if (credits > 0) {
-            totalCredits += credits;
-            totalPoints += (credits * pointVal);
+          if (a === 0) { alert('Coefficient a cannot be 0 in a quadratic equation.'); return; }
+
+          const D = (b * b) - (4 * a * c);
+          resX2Box.style.display = 'block';
+
+          if (D > 0) {
+            const x1 = (-b + Math.sqrt(D)) / (2 * a);
+            const x2 = (-b - Math.sqrt(D)) / (2 * a);
+            resX1.textContent = `x₁ = ${x1.toFixed(4)}`;
+            resX2.textContent = `x₂ = ${x2.toFixed(4)}`;
+            discInfo.textContent = `Discriminant (D = ${D.toFixed(2)}) > 0: Two distinct real roots.`;
+          } else if (D === 0) {
+            const x = -b / (2 * a);
+            resX1.textContent = `x₁ = ${x.toFixed(4)}`;
+            resX2.textContent = `x₂ = ${x.toFixed(4)}`;
+            discInfo.textContent = `Discriminant (D = 0): One repeated real root.`;
+          } else {
+            const real = (-b / (2 * a)).toFixed(4);
+            const imag = (Math.sqrt(-D) / (2 * a)).toFixed(4);
+            resX1.textContent = `x₁ = ${real} + ${imag}i`;
+            resX2.textContent = `x₂ = ${real} - ${imag}i`;
+            discInfo.textContent = `Discriminant (D = ${D.toFixed(2)}) < 0: Two complex conjugate roots.`;
           }
-        });
-
-        const gpa = totalCredits > 0 ? (totalPoints / totalCredits) : 0;
-
-        document.getElementById('res-gpa').textContent = gpa.toFixed(2);
-        document.getElementById('res-credits').textContent = totalCredits;
-        document.getElementById('res-points').textContent = totalPoints.toFixed(2);
+        }
         resultBox.style.display = 'block';
-      });
-
-      resetBtn.addEventListener('click', () => {
-        courseRows.innerHTML = '';
-        addRow('Course 1', '3', 'A');
-        addRow('Course 2', '3', 'B+');
-        addRow('Course 3', '4', 'A-');
-        addRow('Course 4', '3', 'B');
-        resultBox.style.display = 'none';
       });
     });
   </script>

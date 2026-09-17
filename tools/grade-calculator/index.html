@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GPA Calculator — Student's Tool & AI</title>
-  <meta name="description" content="Calculate your term or semester Grade Point Average (GPA) instantly with customizable course credits and letter grades.">
+  <title>Grade Calculator — Student's Tool & AI</title>
+  <meta name="description" content="Calculate your overall course grade based on weighted assignments, quizzes, midterms, and final exams.">
   <link rel="icon" type="image/png" href="/assets/images/logo-icon.png">
 
   <link rel="stylesheet" href="/css/variables.css">
@@ -17,7 +17,6 @@
   <script src="/js/theme.js"></script>
 </head>
 <body>
-  <!-- Header -->
   <header class="site-header">
     <div class="container">
       <nav class="navbar" aria-label="Main Navigation">
@@ -52,10 +51,8 @@
     </div>
   </header>
 
-  <!-- Main Content -->
   <main class="section">
     <div class="container" style="max-width: 52rem;">
-      <!-- Breadcrumb -->
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="breadcrumb-separator">&rsaquo;</span>
@@ -63,13 +60,13 @@
         <span class="breadcrumb-separator">&rsaquo;</span>
         <a href="/tools?category=Academic">Academic</a>
         <span class="breadcrumb-separator">&rsaquo;</span>
-        <span class="breadcrumb-current">GPA Calculator</span>
+        <span class="breadcrumb-current">Grade Calculator</span>
       </nav>
 
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <h1 style="font-size: 2rem; font-weight: 700;">GPA Calculator</h1>
-          <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.25rem;">Calculate your term or semester Grade Point Average quickly and accurately.</p>
+          <h1 style="font-size: 2rem; font-weight: 700;">Grade Calculator</h1>
+          <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.25rem;">Compute weighted final grades for any subject based on assignment weights.</p>
         </div>
         <button id="fav-btn" class="btn btn-outline btn-sm" aria-label="Toggle Favorite">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -78,72 +75,62 @@
       </div>
 
       <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-        <form id="gpa-form" onsubmit="return false;">
-          <div id="course-rows">
-            <!-- Course rows populated dynamically -->
-          </div>
+        <form id="grade-form" onsubmit="return false;">
+          <div id="item-rows"></div>
 
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 1rem;">
-            <button type="button" id="add-course-btn" class="btn btn-secondary btn-sm">+ Add Course</button>
+            <button type="button" id="add-item-btn" class="btn btn-secondary btn-sm">+ Add Assessment</button>
             <div class="form-actions" style="margin-top: 0;">
               <button type="button" id="reset-btn" class="btn btn-outline">Reset</button>
-              <button type="button" id="calc-btn" class="btn btn-primary">Calculate GPA</button>
+              <button type="button" id="calc-btn" class="btn btn-primary">Calculate Grade</button>
             </div>
           </div>
         </form>
 
-        <!-- Result Box -->
         <div id="result-box" class="tool-result-card" style="display: none;">
-          <div class="result-title">GPA Summary</div>
+          <div class="result-title">Overall Assessment Grade</div>
           <div class="result-grid">
             <div class="result-stat">
-              <div class="result-value" id="res-gpa">0.00</div>
-              <div class="result-label">Semester GPA</div>
+              <div class="result-value" id="res-percent">0.0%</div>
+              <div class="result-label">Overall Score</div>
             </div>
             <div class="result-stat">
-              <div class="result-value" id="res-credits">0</div>
-              <div class="result-label">Total Credits</div>
+              <div class="result-value" id="res-letter">A</div>
+              <div class="result-label">Letter Grade</div>
             </div>
             <div class="result-stat">
-              <div class="result-value" id="res-points">0.00</div>
-              <div class="result-label">Grade Points</div>
+              <div class="result-value" id="res-weight">0%</div>
+              <div class="result-label">Total Weight</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- How it works -->
       <section class="tool-explainer">
         <h2>How It Works</h2>
-        <p>Your Semester GPA is calculated by multiplying the numerical point value of each letter grade by the course credit hours to get total grade points, then dividing the sum of grade points by total credit hours attempted.</p>
-        <p style="margin-top: 0.5rem;">Standard 4.0 Scale Grade Values: A (4.0), A- (3.7), B+ (3.3), B (3.0), B- (2.7), C+ (2.3), C (2.0), C- (1.7), D+ (1.3), D (1.0), F (0.0).</p>
+        <p>Weighted Grade = <code>Sum((Score % * Weight %)) / Sum(Weight %)</code>. The calculated score maps directly to academic letter standards.</p>
       </section>
 
-      <!-- Related Tools -->
       <section class="related-tools-section">
         <h3 class="related-tools-title">Related Academic Tools</h3>
         <div class="grid-3">
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">CGPA Calculator</h4>
-            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">Calculate cumulative overall GPA across multiple terms.</p>
-            <a href="/tools/cgpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Marks Calculator</h4>
+            <a href="/tools/marks-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Semester GPA Calculator</h4>
-            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">Detailed semester grade point distribution analysis.</p>
-            <a href="/tools/semester-gpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Percentage Calculator</h4>
+            <a href="/tools/percentage-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Grade Calculator</h4>
-            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">Calculate weighted assessment and assignment final grades.</p>
-            <a href="/tools/grade-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">GPA Calculator</h4>
+            <a href="/tools/gpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
         </div>
       </section>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -181,21 +168,15 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const toolId = 'gpa-calculator';
-      const courseRows = document.getElementById('course-rows');
-      const addCourseBtn = document.getElementById('add-course-btn');
+      const toolId = 'grade-calculator';
+      const itemRows = document.getElementById('item-rows');
+      const addItemBtn = document.getElementById('add-item-btn');
       const calcBtn = document.getElementById('calc-btn');
       const resetBtn = document.getElementById('reset-btn');
       const resultBox = document.getElementById('result-box');
       const favBtn = document.getElementById('fav-btn');
       const favBtnText = document.getElementById('fav-btn-text');
 
-      const gradeScale = {
-        'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7,
-        'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'F': 0.0
-      };
-
-      // Favorite setup
       function updateFavUI() {
         if (window.ToolsStorage && window.ToolsStorage.isFavorite(toolId)) {
           favBtnText.textContent = 'Favorited';
@@ -217,75 +198,63 @@
         });
       }
 
-      function addRow(name = '', credits = '3', grade = 'A') {
+      function addRow(name = '', weight = '20', score = '85') {
         const row = document.createElement('div');
-        row.className = 'form-row course-row';
+        row.className = 'form-row item-row';
         row.style.marginBottom = '0.75rem';
         row.innerHTML = `
-          <div style="flex: 2;">
-            <input type="text" class="form-control course-name" placeholder="Course Name (optional)" value="${name}">
-          </div>
-          <div style="flex: 1;">
-            <input type="number" class="form-control course-credits" placeholder="Credits" min="0.5" step="0.5" value="${credits}">
-          </div>
-          <div style="flex: 1;">
-            <select class="form-select course-grade">
-              ${Object.keys(gradeScale).map(g => `<option value="${g}" ${g === grade ? 'selected' : ''}>${g} (${gradeScale[g].toFixed(1)})</option>`).join('')}
-            </select>
-          </div>
-          <div style="display: flex; align-items: center;">
-            <button type="button" class="btn btn-outline remove-row-btn" aria-label="Remove Course" style="padding: 0.65rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">&times;</button>
-          </div>
+          <div style="flex: 2;"><input type="text" class="form-control item-name" placeholder="Assignment / Exam" value="${name}"></div>
+          <div style="flex: 1;"><input type="number" class="form-control item-weight" placeholder="Weight (%)" min="0" max="100" value="${weight}"></div>
+          <div style="flex: 1;"><input type="number" class="form-control item-score" placeholder="Score (%)" min="0" max="100" value="${score}"></div>
+          <div style="display: flex; align-items: center;"><button type="button" class="btn btn-outline remove-row-btn" style="padding: 0.65rem; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">&times;</button></div>
         `;
-        courseRows.appendChild(row);
+        itemRows.appendChild(row);
       }
 
-      // Initial rows
-      addRow('Course 1', '3', 'A');
-      addRow('Course 2', '3', 'B+');
-      addRow('Course 3', '4', 'A-');
-      addRow('Course 4', '3', 'B');
+      addRow('Homework & Quizzes', '20', '90');
+      addRow('Midterm Exam', '30', '82');
+      addRow('Final Project', '50', '88');
 
-      addCourseBtn.addEventListener('click', () => addRow(`Course ${courseRows.children.length + 1}`, '3', 'A'));
+      addItemBtn.addEventListener('click', () => addRow(`Assessment ${itemRows.children.length + 1}`, '10', '80'));
 
-      courseRows.addEventListener('click', (e) => {
-        if (e.target.classList.contains('remove-row-btn')) {
-          if (courseRows.children.length > 1) {
-            e.target.closest('.course-row').remove();
-          }
+      itemRows.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-row-btn') && itemRows.children.length > 1) {
+          e.target.closest('.item-row').remove();
         }
       });
 
+      function getLetter(p) {
+        if (p >= 90) return 'A';
+        if (p >= 80) return 'B';
+        if (p >= 70) return 'C';
+        if (p >= 60) return 'D';
+        return 'F';
+      }
+
       calcBtn.addEventListener('click', () => {
-        let totalCredits = 0;
-        let totalPoints = 0;
+        let totalWeight = 0;
+        let weightedScoreSum = 0;
 
-        const rows = courseRows.querySelectorAll('.course-row');
-        rows.forEach(row => {
-          const credits = parseFloat(row.querySelector('.course-credits').value) || 0;
-          const grade = row.querySelector('.course-grade').value;
-          const pointVal = gradeScale[grade] !== undefined ? gradeScale[grade] : 0;
-
-          if (credits > 0) {
-            totalCredits += credits;
-            totalPoints += (credits * pointVal);
-          }
+        itemRows.querySelectorAll('.item-row').forEach(row => {
+          const w = parseFloat(row.querySelector('.item-weight').value) || 0;
+          const s = parseFloat(row.querySelector('.item-score').value) || 0;
+          totalWeight += w;
+          weightedScoreSum += (s * (w / 100));
         });
 
-        const gpa = totalCredits > 0 ? (totalPoints / totalCredits) : 0;
+        const finalScore = totalWeight > 0 ? (weightedScoreSum / (totalWeight / 100)) : 0;
 
-        document.getElementById('res-gpa').textContent = gpa.toFixed(2);
-        document.getElementById('res-credits').textContent = totalCredits;
-        document.getElementById('res-points').textContent = totalPoints.toFixed(2);
+        document.getElementById('res-percent').textContent = finalScore.toFixed(1) + '%';
+        document.getElementById('res-letter').textContent = getLetter(finalScore);
+        document.getElementById('res-weight').textContent = totalWeight + '%';
         resultBox.style.display = 'block';
       });
 
       resetBtn.addEventListener('click', () => {
-        courseRows.innerHTML = '';
-        addRow('Course 1', '3', 'A');
-        addRow('Course 2', '3', 'B+');
-        addRow('Course 3', '4', 'A-');
-        addRow('Course 4', '3', 'B');
+        itemRows.innerHTML = '';
+        addRow('Homework & Quizzes', '20', '90');
+        addRow('Midterm Exam', '30', '82');
+        addRow('Final Project', '50', '88');
         resultBox.style.display = 'none';
       });
     });
