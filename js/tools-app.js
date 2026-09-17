@@ -158,7 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function trackCurrentToolPage() {
     const currentPath = window.location.pathname.replace(/\/$/, '');
     const tools = window.STUDENT_TOOLS || [];
-    const matched = tools.find(t => t.url.replace(/\/$/, '') === currentPath);
+    const matched = tools.find(t => {
+      if (!t.url) return false;
+      const cleanToolUrl = t.url.replace(/^(\.\.\/)+/, '').replace(/\/index\.html$/, '').replace(/\/$/, '');
+      return currentPath.endsWith(cleanToolUrl) || currentPath.endsWith(t.id);
+    });
 
     if (matched && window.ToolsStorage) {
       window.ToolsStorage.addRecent(matched.id);
