@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student's Tool & AI — Learn Smarter. Solve Faster. Achieve More.</title>
+  <meta name="description" content="Powerful student tools and an intelligent AI study assistant, all in one place. Access GPA calculators, scientific tools, and smart learning help.">
+  <link rel="icon" type="image/png" href="/assets/images/logo-icon.png">
+  <link rel="apple-touch-icon" href="/assets/images/logo-icon.png">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+
+  <!-- Early Theme Controller Script -->
+  <script src="/js/theme.js"></script>
+</head>
+<body>
+
+  <!-- Site Header / Navbar -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <!-- Brand Logo -->
+        <a href="/" class="brand-logo" aria-label="Student's Tool & AI Home">
+          <img src="/assets/images/logo-horizontal.png" alt="Student's Tool & AI Logo">
+        </a>
+
+        <!-- Main Nav Links -->
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="/" class="nav-link active">Home</a></li>
+          <li><a href="/ai" class="nav-link">AI Assistant</a></li>
+          <li><a href="/tools" class="nav-link">Student Tools</a></li>
+          <li><a href="/about" class="nav-link">About</a></li>
+          <li><a href="/contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <!-- Right Action Buttons -->
+        <div class="header-actions">
+          <a href="/login" class="btn btn-outline btn-sm">Login</a>
+
+          <!-- Theme Toggle Component -->
+          <div class="theme-toggle-wrapper">
+            <button class="theme-toggle-btn" id="theme-toggle-btn" aria-expanded="false" aria-haspopup="true" aria-label="Toggle theme settings">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+              <span id="current-theme-label">Theme</span>
+            </button>
+            <div class="theme-dropdown" id="theme-dropdown">
+              <button class="theme-option-btn" data-theme-val="light">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                Light
+              </button>
+              <button class="theme-option-btn" data-theme-val="dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark
+              </button>
+              <button class="theme-option-btn" data-theme-val="system">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                System
+              </button>
+            </div>
+          </div>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-visual-bg">
+        <div class="shape-circle-1"></div>
+        <div class="shape-circle-2"></div>
+      </div>
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <span class="badge">Next-Gen Learning Platform</span>
+        </div>
+        <h1 class="hero-title">Learn Smarter. Solve Faster. Achieve More.</h1>
+        <p class="hero-subtext">Powerful student tools and an intelligent AI assistant, all in one place. Streamline your study routine with precision calculators and instant learning assistance.</p>
+        <div class="hero-cta">
+          <a href="/ai" class="btn btn-primary btn-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12L2.5 7.5"/><path d="M12 12v9.5"/></svg>
+            Ask AI
+          </a>
+          <a href="/tools" class="btn btn-secondary btn-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+            Explore Student Tools
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Student Tools Section -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Academic Calculators</div>
+          <h2 class="section-title">Popular Student Tools</h2>
+          <p class="section-desc">Fast, accurate, and easy-to-use calculators built specifically for academic success.</p>
+        </div>
+
+        <div class="grid-3">
+          <!-- GPA Calculator -->
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <h3 class="card-title">GPA Calculator</h3>
+            <p class="card-desc">Calculate your term GPA effortlessly with course credits and letter grade conversions.</p>
+            <a href="/tools/gpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+
+          <!-- CGPA Calculator -->
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h3 class="card-title">CGPA Calculator</h3>
+            <p class="card-desc">Track cumulative academic progress across multiple semesters seamlessly.</p>
+            <a href="/tools/cgpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+
+          <!-- Percentage Calculator -->
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+            </div>
+            <h3 class="card-title">Percentage Calculator</h3>
+            <p class="card-desc">Quickly compute test percentages, score markups, and grade ratios.</p>
+            <a href="/tools/percentage-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+
+          <!-- Attendance Calculator -->
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
+            </div>
+            <h3 class="card-title">Attendance Calculator</h3>
+            <p class="card-desc">Determine required classes to hit your target attendance percentage requirement.</p>
+            <a href="/tools/attendance-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+
+          <!-- Scientific Calculator -->
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+            </div>
+            <h3 class="card-title">Scientific Calculator</h3>
+            <p class="card-desc">Advanced mathematical operations, trigonometry, exponents, and equations.</p>
+            <a href="/tools/scientific-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+
+          <!-- Age Calculator -->
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="card-title">Age Calculator</h3>
+            <p class="card-desc">Compute exact age in years, months, and days for registration requirements.</p>
+            <a href="/tools/age-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Assistant Promotion Section -->
+    <section class="section" style="background-color: var(--bg-surface);">
+      <div class="container">
+        <div class="ai-promo-box">
+          <div class="ai-promo-content">
+            <div>
+              <span class="badge" style="margin-bottom: 1rem;">Smart Learning</span>
+              <h2>Meet Your AI Study Assistant</h2>
+              <p style="margin-top: 1rem;">Ask questions and receive well-organized, structured answers tailored to your curriculum and assignments.</p>
+
+              <ul class="ai-promo-list">
+                <li class="ai-promo-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>Study Help & Explanations:</strong> Break down complex topics into clear steps.</span>
+                </li>
+                <li class="ai-promo-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>Problem Solving & Writing:</strong> Guidance on math, essays, and coding challenges.</span>
+                </li>
+                <li class="ai-promo-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>Image & File Understanding:</strong> Analyze diagrams, uploaded notes, and documents.</span>
+                </li>
+                <li class="ai-promo-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong>Instant Summarization:</strong> Summarize lecture notes and chapters in seconds.</span>
+                </li>
+              </ul>
+
+              <div class="info-notice" style="margin-bottom: 1.5rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span>Note: AI responses are provided as structured text output.</span>
+              </div>
+
+              <a href="/ai" class="btn btn-primary">Try AI Assistant &rarr;</a>
+            </div>
+
+            <!-- Visual Preview Box -->
+            <div class="ai-preview-card">
+              <div class="ai-chat-bubble chat-user">
+                "Can you explain photosynthesis in simple terms for my biology review?"
+              </div>
+              <div class="ai-chat-bubble chat-assistant">
+                <strong>Photosynthesis Explained:</strong><br><br>
+                It's the process plants use to convert sunlight into energy:<br>
+                1. <strong>Inputs:</strong> Water + Carbon Dioxide + Sunlight<br>
+                2. <strong>Process:</strong> Chlorophyll absorbs light energy<br>
+                3. <strong>Outputs:</strong> Oxygen + Glucose (Food)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid Section -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Why Student's Tool & AI</div>
+          <h2 class="section-title">Designed for Modern Learning</h2>
+          <p class="section-desc">All the essentials you need to stay organized, boost efficiency, and excel.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            </div>
+            <h3 class="card-title">AI Study Assistant</h3>
+            <p class="card-desc">Intelligent text-based responses to accelerate comprehension and assignment writing.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/></svg>
+            </div>
+            <h3 class="card-title">Student Calculators</h3>
+            <p class="card-desc">Comprehensive suite of GPA, percentage, attendance, and scientific tools.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <h3 class="card-title">Image & File Support</h3>
+            <p class="card-desc">Extract insights, questions, and summaries from study materials and uploaded images.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3 class="card-title">Productivity Tools</h3>
+            <p class="card-desc">Designed to minimize distraction and maximize academic efficiency.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <h3 class="card-title">Mobile Friendly</h3>
+            <p class="card-desc">Fully optimized mobile experience for seamless learning on smartphones and tablets.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3 class="card-title">English + Future Bangla Support</h3>
+            <p class="card-desc">Multilingual capabilities engineered to support diverse learning communities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="section">
+      <div class="container">
+        <div class="final-cta-box">
+          <h2>Ready to Study Smarter?</h2>
+          <p>Join thousands of students elevating their academic achievements with smart technology.</p>
+          <div class="hero-cta">
+            <a href="/ai" class="btn btn-secondary btn-lg">Ask AI</a>
+            <a href="/tools" class="btn btn-outline btn-lg">Explore Tools</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" aria-label="Student's Tool & AI Home">
+            <img src="/assets/images/logo-horizontal.png" alt="Student's Tool & AI Logo">
+          </a>
+          <p class="footer-tagline">Learn Smarter. Solve Faster. Achieve More.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/ai">AI Assistant</a></li>
+            <li><a href="/tools">Student Tools</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/settings">Settings</a></li>
+            <li><a href="/login">Login</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms-of-service">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Student's Tool & AI. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/navigation.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+/* Hero Section */
+.hero-section {
+  position: relative;
+  padding: 5rem 0 4rem 0;
+  text-align: center;
+  background: var(--hero-bg-glow);
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 52rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  margin-bottom: 1.25rem;
+}
+
+.hero-title {
+  margin-bottom: 1.25rem;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtext {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 2.25rem;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Decorative CSS Shape Elements */
+.hero-visual-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.shape-circle-1 {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
+  filter: blur(20px);
+}
+
+.shape-circle-2 {
+  position: absolute;
+  bottom: 10%;
+  right: 12%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%);
+  filter: blur(25px);
+}
+
+/* Page Section Common Layout */
+.section {
+  padding: 4.5rem 0;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-subtitle {
+  color: var(--primary-400);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+/* Cards Grids */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* AI Promotion Special Section */
+.ai-promo-box {
+  background: linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-accent-subtle) 100%);
+  border: 1px solid var(--border-brand);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-promo-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.ai-promo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.ai-promo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: var(--text-main);
+  font-size: 0.975rem;
+}
+
+.ai-promo-item svg {
+  color: var(--primary-400);
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.ai-preview-card {
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.ai-chat-bubble {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.925rem;
+  margin-bottom: 1rem;
+}
+
+.chat-user {
+  background-color: var(--primary-500);
+  color: #ffffff;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.chat-assistant {
+  background-color: var(--bg-muted);
+  color: var(--text-main);
+  border-bottom-left-radius: 2px;
+  border: 1px solid var(--border-color);
+}
+
+/* Final CTA Banner */
+.final-cta-box {
+  text-align: center;
+  background: var(--brand-gradient);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 4rem 2rem;
+  box-shadow: var(--shadow-glow);
+}
+
+.final-cta-box h2 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.final-cta-box p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-cta-box .btn-secondary {
+  background-color: #ffffff;
+  color: var(--primary-600);
+  border: none;
+}
+
+.final-cta-box .btn-secondary:hover {
+  background-color: var(--primary-50);
+  color: var(--primary-700);
+}
+
+.final-cta-box .btn-outline {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+}
+
+.final-cta-box .btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+}
