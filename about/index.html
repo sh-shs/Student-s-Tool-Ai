@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us — Student's Tool & AI</title>
-  <meta name="description" content="Learn more about Student's Tool & AI and our mission to empower students through smart technology.">
+  <meta name="description" content="Learn more about Student's Tool & AI, our mission, vision, and suite of smart academic calculators and AI study assistant.">
   <link rel="icon" type="image/png" href="../assets/images/logo-icon.png">
 
+  <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="../css/variables.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/layout.css">
@@ -17,6 +18,8 @@
   <script src="../js/theme.js"></script>
 </head>
 <body>
+
+  <!-- Site Header / Navbar -->
   <header class="site-header">
     <div class="container">
       <nav class="navbar" aria-label="Main Navigation">
@@ -55,29 +58,271 @@
     </div>
   </header>
 
-  <main class="section">
-    <div class="container" style="max-width: 52rem;">
-      <div class="section-header">
-        <div class="section-subtitle">Our Mission</div>
-        <h1 class="section-title">About Student's Tool & AI</h1>
-        <p class="section-desc">Empowering learning through smart technology.</p>
+  <!-- Main Content -->
+  <main>
+    <!-- 1. Hero Section -->
+    <section class="hero-section">
+      <div class="hero-visual-bg">
+        <div class="shape-circle-1"></div>
+        <div class="shape-circle-2"></div>
+      </div>
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <span class="badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            OUR MISSION
+          </span>
+        </div>
+        <h1 class="hero-title">About Student's Tool & AI</h1>
+        <p class="hero-subtext">Empowering learning through smart technology, artificial intelligence, and essential academic tools designed specifically for students worldwide.</p>
       </div>
 
-      <div class="card" style="padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
-        <h2 style="font-size: 1.5rem;">Learn Smarter. Solve Faster. Achieve More.</h2>
-        <p><strong>Student's Tool & AI</strong> is built to simplify academic life. We combine precise student calculators with modern artificial intelligence to create a seamless learning workspace.</p>
-        <p>Whether you need to project your semester GPA, calculate attendance thresholds, or summarize complex study materials, our unified platform provides modern, high-performance tools without unnecessary distraction.</p>
+      <!-- Wave Bottom Divider -->
+      <div class="hero-wave-divider">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 350,-40 500,65 C650,170 900,10 1200,40 L1200,120 L0,120 Z" class="shape-fill"></path>
+        </svg>
       </div>
-    </div>
+    </section>
+
+    <!-- 2. Mission Statement Card Section -->
+    <section class="section fade-in-section">
+      <div class="container" style="max-width: 58rem;">
+        <div class="about-mission-card">
+          <div class="mission-icon-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-3.05 11a22.35 22.35 0 0 1-3.95 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <div class="mission-content">
+            <h2 class="mission-card-title">Learn Smarter. Solve Faster. Achieve More.</h2>
+            <p class="mission-text">
+              <strong>Student's Tool & AI</strong> is built with a singular focus: to eliminate friction from academic life. We combine precise student calculators with modern artificial intelligence to build a unified, accessible workspace for learners everywhere.
+            </p>
+            <p class="mission-text">
+              Whether you need to project your semester GPA, compute attendance thresholds, optimize study session timers, or get instant explanations from an AI study assistant, our platform delivers high-performance tools without paywalls, ads, or unnecessary distractions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Section: What We Offer -->
+    <section class="section fade-in-section" style="background-color: var(--bg-surface);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Our Capabilities</div>
+          <h2 class="section-title">What We Offer</h2>
+          <p class="section-desc">Comprehensive tools engineered to help you navigate every aspect of student life.</p>
+        </div>
+
+        <div class="grid-2 offer-grid">
+          <!-- Smart Calculators -->
+          <div class="card offer-card">
+            <div class="offer-icon-box icon-blue">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div class="offer-info">
+              <h3 class="offer-title">Smart Calculators</h3>
+              <p class="offer-desc">Accurate GPA, CGPA, Attendance, Percentage, Marks, and Scientific calculators designed for instant academic planning.</p>
+              <a href="../tools/index.html" class="btn btn-outline btn-sm">Explore Calculators &rarr;</a>
+            </div>
+          </div>
+
+          <!-- AI Study Assistant -->
+          <div class="card offer-card">
+            <div class="offer-icon-box icon-green">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12L2.5 7.5"/><path d="M12 12v9.5"/></svg>
+            </div>
+            <div class="offer-info">
+              <h3 class="offer-title">AI Study Assistant</h3>
+              <p class="offer-desc">Ask questions, summarize long study notes, brainstorm ideas, and get step-by-step problem-solving explanations on demand.</p>
+              <a href="../ai/index.html" class="btn btn-outline btn-sm">Ask AI Assistant &rarr;</a>
+            </div>
+          </div>
+
+          <!-- File & Image Tools -->
+          <div class="card offer-card">
+            <div class="offer-icon-box icon-purple">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <div class="offer-info">
+              <h3 class="offer-title">File & Image Tools</h3>
+              <p class="offer-desc">Resize photos, compress study materials, convert images to PDF, and clean up text directly inside your browser.</p>
+              <a href="../tools/index.html?cat=Image%20%26%20File" class="btn btn-outline btn-sm">Use File Tools &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Productivity Tools -->
+          <div class="card offer-card">
+            <div class="offer-icon-box icon-orange">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="offer-info">
+              <h3 class="offer-title">Productivity Tools</h3>
+              <p class="offer-desc">Stay focused with custom Pomodoro timers, countdown timers, case converters, word counters, and password generators.</p>
+              <a href="../tools/index.html?cat=Productivity" class="btn btn-outline btn-sm">Boost Productivity &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Section: Why Choose Us -->
+    <section class="section fade-in-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Our Advantages</div>
+          <h2 class="section-title">Why Choose Us</h2>
+          <p class="section-desc">Built from the ground up to keep your focus on learning, not configuration.</p>
+        </div>
+
+        <div class="grid-2 why-grid">
+          <div class="why-card">
+            <div class="why-badge-icon icon-green">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <h3 class="why-title">100% Free Always</h3>
+              <p class="why-desc">No hidden subscriptions, premium paywalls, or credit card requirements. Every tool and feature is fully accessible to every student.</p>
+            </div>
+          </div>
+
+          <div class="why-card">
+            <div class="why-badge-icon icon-blue">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+              <h3 class="why-title">Secure & Private</h3>
+              <p class="why-desc">Client-side operations keep your calculations, images, and data processing safely in your browser. Your privacy comes first.</p>
+            </div>
+          </div>
+
+          <div class="why-card">
+            <div class="why-badge-icon icon-purple">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div>
+              <h3 class="why-title">Mobile Friendly</h3>
+              <p class="why-desc">Fully responsive layouts optimized for seamless operation across desktop browsers, tablets, and smartphones.</p>
+            </div>
+          </div>
+
+          <div class="why-card">
+            <div class="why-badge-icon icon-orange">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <h3 class="why-title">Fast & Accurate</h3>
+              <p class="why-desc">Lightweight architecture ensures instant loading times and millisecond response for all calculation algorithms.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Section: Our Vision & Story -->
+    <section class="section fade-in-section" style="background-color: var(--bg-surface);">
+      <div class="container" style="max-width: 58rem;">
+        <div class="section-header">
+          <div class="section-subtitle">Our Background</div>
+          <h2 class="section-title">Our Vision & Story</h2>
+        </div>
+
+        <div class="card vision-card">
+          <h3 class="vision-heading">Why Student's Tool & AI Was Created</h3>
+          <p class="vision-paragraph">
+            As students, we experienced the daily frustration of jumping between clunky calculator websites covered in ads, unverified formulas, and fragmented tools. Simple tasks like calculating required attendance percentages or estimating term GPAs shouldn't require navigating complex interfaces.
+          </p>
+          <p class="vision-paragraph">
+            We created <strong>Student's Tool & AI</strong> to solve this problem once and for all. By bringing together over 30 academic tools and an intelligent AI study companion into one modern web portal, we give students a reliable home base for their academic journey.
+          </p>
+          <div class="vision-future-box">
+            <h4>🚀 Looking Ahead</h4>
+            <p>Our roadmap includes multilingual options (including full Bengali support), advanced study analytics, offline capabilities, and expanded AI study features to support students globally.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Section: Stats & Key Metrics -->
+    <section class="section fade-in-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">By The Numbers</div>
+          <h2 class="section-title">Platform Statistics</h2>
+        </div>
+
+        <div class="about-stats-grid">
+          <div class="about-stat-card">
+            <div class="about-stat-num">34+</div>
+            <div class="about-stat-label">Student Tools</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="about-stat-num">100%</div>
+            <div class="about-stat-label">Free Access</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="about-stat-num">24/7</div>
+            <div class="about-stat-label">Always Available</div>
+          </div>
+          <div class="about-stat-card">
+            <div class="about-stat-num">0</div>
+            <div class="about-stat-label">Ads or Paywalls</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Section: Meet the Founder -->
+    <section class="section fade-in-section" style="background-color: var(--bg-surface);">
+      <div class="container" style="max-width: 50rem;">
+        <div class="section-header">
+          <div class="section-subtitle">Behind The Project</div>
+          <h2 class="section-title">Meet the Founder</h2>
+        </div>
+
+        <div class="card founder-card">
+          <div class="founder-avatar-wrapper">
+            <div class="founder-avatar-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <div class="founder-details">
+            <h3 class="founder-name">Student's Tool & AI Development Team</h3>
+            <div class="founder-role">Founder & Lead Developer</div>
+            <p class="founder-bio">
+              "Our goal is simple: build clean, effective software that helps students learn faster and achieve their full potential. Technology should make education easier, not more complicated."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Section: CTA Banner -->
+    <section class="section fade-in-section" style="margin-top: 2rem; margin-bottom: 2rem;">
+      <div class="container">
+        <div class="final-cta-box">
+          <h2 style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em;">Ready to Start Learning?</h2>
+          <p style="font-size: 1.1rem; max-width: 36rem;">Explore our complete suite of student tools or chat with our AI assistant today.</p>
+          <div class="hero-cta">
+            <a href="../tools/index.html" class="btn btn-secondary btn-lg">Explore Tools</a>
+            <a href="../contact/index.html" class="btn btn-outline btn-lg">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="../index.html"><img src="../assets/images/logo-horizontal.png" alt="Student's Tool & AI Logo"></a>
+          <a href="../index.html" aria-label="Student's Tool & AI Home">
+            <img src="../assets/images/logo-horizontal.png" alt="Student's Tool & AI Logo">
+          </a>
           <p class="footer-tagline">Learn Smarter. Solve Faster. Achieve More.</p>
         </div>
+
         <div>
           <h4 class="footer-col-title">Navigation</h4>
           <ul class="footer-links">
@@ -90,6 +335,7 @@
             <li><a href="../login/index.html">Login</a></li>
           </ul>
         </div>
+
         <div>
           <h4 class="footer-col-title">Legal</h4>
           <ul class="footer-links">
@@ -98,10 +344,14 @@
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2026 Student's Tool & AI. All rights reserved.</div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Student's Tool & AI. All rights reserved.
+      </div>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="../js/navigation.js"></script>
   <script src="../js/main.js"></script>
 </body>
