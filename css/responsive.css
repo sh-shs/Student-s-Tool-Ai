@@ -43,8 +43,13 @@
     display: flex;
   }
 
-  .grid-3, .grid-2 {
+  .grid-3, .grid-2, .contact-grid {
     grid-template-columns: 1fr;
+  }
+
+  .contact-info-card,
+  .contact-form-card {
+    padding: 1.5rem;
   }
 
   .footer-grid {
