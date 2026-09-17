@@ -1,46 +1,73 @@
 /* Hero Section */
 .hero-section {
   position: relative;
-  padding: 5rem 0 4rem 0;
+  padding: 6rem 1.5rem 6.5rem 1.5rem;
   text-align: center;
   background: var(--hero-bg-glow);
   overflow: hidden;
 }
 
 .hero-content {
-  max-width: 52rem;
+  max-width: 54rem;
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
 
 .hero-badge {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-title {
-  margin-bottom: 1.25rem;
-  background: var(--brand-gradient);
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  background: var(--text-gradient-blue-green);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .hero-subtext {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--text-muted);
-  margin-bottom: 2.25rem;
-  max-width: 40rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .hero-cta {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
+}
+
+.hero-wave-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-wave-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 48px;
+}
+
+.hero-wave-divider .shape-fill {
+  fill: var(--bg-main);
 }
 
 /* Decorative CSS Shape Elements */
@@ -79,33 +106,39 @@
   filter: blur(25px);
 }
 
-/* Page Section Common Layout */
+/* Page Section Common Layout (80px - 100px Spacing) */
 .section {
-  padding: 4.5rem 0;
+  padding: 5.5rem 0;
 }
 
 .section-header {
   text-align: center;
-  max-width: 42rem;
-  margin: 0 auto 3.5rem auto;
+  max-width: 44rem;
+  margin: 0 auto 3.75rem auto;
 }
 
 .section-subtitle {
   color: var(--primary-400);
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+  display: inline-block;
 }
 
 .section-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin-bottom: 1rem;
+  color: var(--text-main);
 }
 
 .section-desc {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
+  line-height: 1.6;
 }
 
 /* Cards Grids */
@@ -123,18 +156,24 @@
 
 /* AI Promotion Special Section */
 .ai-promo-box {
-  background: linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-accent-subtle) 100%);
+  background: linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%);
   border: 1px solid var(--border-brand);
-  border-radius: var(--radius-lg);
-  padding: 3rem 2.5rem;
+  border-radius: var(--radius-xl);
+  padding: 3.5rem 3rem;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.ai-promo-box:hover {
+  box-shadow: var(--card-hover-shadow);
 }
 
 .ai-promo-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 3.5rem;
   align-items: center;
 }
 
