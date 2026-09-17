@@ -1452,3 +1452,94 @@
   background-color: rgba(249, 115, 22, 0.2);
   color: #fb923c;
 }
+
+.login-subtext {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Password Strength Indicator */
+.password-strength-wrapper {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-fast), visibility var(--transition-fast);
+}
+
+.password-strength-wrapper.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.strength-bar-bg {
+  flex: 1;
+  height: 5px;
+  background-color: var(--bg-muted);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.strength-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-bar-fill.weak {
+  width: 33%;
+  background-color: #ef4444;
+}
+
+.strength-bar-fill.medium {
+  width: 66%;
+  background-color: #f59e0b;
+}
+
+.strength-bar-fill.strong {
+  width: 100%;
+  background-color: #10b981;
+}
+
+.strength-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 55px;
+  text-align: right;
+}
+
+.strength-label.weak { color: #ef4444; }
+.strength-label.medium { color: #f59e0b; }
+.strength-label.strong { color: #10b981; }
+
+/* Terms Checkbox Group */
+.terms-checkbox-group {
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--text-main);
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.4;
+}
+
+.terms-checkbox {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15rem;
+  accent-color: #10b981;
+  cursor: pointer;
+  flex-shrink: 0;
+}
