@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attendance Calculator — Student's Tool & AI</title>
-  <meta name="description" content="Calculate current attendance percentage and determine how many classes you can afford to miss or need to attend to hit your target.">
+  <title>Word Counter — Student's Tool & AI</title>
+  <meta name="description" content="Real-time online word counter, sentence counter, paragraph counter, and reading time estimator for student essays and assignments.">
   <link rel="icon" type="image/png" href="/assets/images/logo-icon.png">
 
   <link rel="stylesheet" href="/css/variables.css">
@@ -58,15 +58,15 @@
         <span class="breadcrumb-separator">&rsaquo;</span>
         <a href="/tools">Tools</a>
         <span class="breadcrumb-separator">&rsaquo;</span>
-        <a href="/tools?category=Academic">Academic</a>
+        <a href="/tools?category=Text">Text</a>
         <span class="breadcrumb-separator">&rsaquo;</span>
-        <span class="breadcrumb-current">Attendance Calculator</span>
+        <span class="breadcrumb-current">Word Counter</span>
       </nav>
 
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <h1 style="font-size: 2rem; font-weight: 700;">Attendance Calculator</h1>
-          <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.25rem;">Calculate required classes to meet your target attendance threshold.</p>
+          <h1 style="font-size: 2rem; font-weight: 700;">Word Counter</h1>
+          <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.25rem;">Real-time text analysis for words, characters, sentences, and estimated reading time.</p>
         </div>
         <button id="fav-btn" class="btn btn-outline btn-sm" aria-label="Toggle Favorite">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -75,65 +75,56 @@
       </div>
 
       <div class="card" style="padding: 2rem; margin-bottom: 2rem;">
-        <form id="attendance-form" onsubmit="return false;">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="attended-classes">Classes Attended</label>
-              <input type="number" id="attended-classes" class="form-control" value="38" min="0">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="total-classes">Total Classes Held</label>
-              <input type="number" id="total-classes" class="form-control" value="50" min="1">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="target-percent">Target Attendance (%)</label>
-              <input type="number" id="target-percent" class="form-control" value="75" min="1" max="100">
-            </div>
-          </div>
+        <div class="form-group">
+          <label class="form-label" for="text-input">Type or Paste Your Text Below</label>
+          <textarea id="text-input" class="form-control" rows="8" placeholder="Start typing or paste your essay, assignment, or notes here..."></textarea>
+        </div>
 
-          <div class="form-actions" style="margin-top: 1rem;">
-            <button type="button" id="reset-btn" class="btn btn-outline">Reset</button>
-            <button type="button" id="calc-btn" class="btn btn-primary">Calculate Attendance</button>
-          </div>
-        </form>
-
-        <div id="result-box" class="tool-result-card" style="display: none;">
-          <div class="result-title">Attendance Status</div>
+        <div class="tool-result-card" style="margin-top: 1.5rem;">
+          <div class="result-title">Text Statistics</div>
           <div class="result-grid">
             <div class="result-stat">
-              <div class="result-value" id="res-current-p">0%</div>
-              <div class="result-label">Current Attendance</div>
+              <div class="result-value" id="res-words">0</div>
+              <div class="result-label">Words</div>
             </div>
             <div class="result-stat">
-              <div class="result-value" id="res-action-count">0</div>
-              <div class="result-label" id="res-action-label">Classes Needed</div>
+              <div class="result-value" id="res-chars">0</div>
+              <div class="result-label">Characters</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-value" id="res-sentences">0</div>
+              <div class="result-label">Sentences</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-value" id="res-paragraphs">0</div>
+              <div class="result-label">Paragraphs</div>
             </div>
           </div>
-          <p id="res-status-msg" style="margin-top: 1rem; color: var(--text-main); font-size: 0.95rem; line-height: 1.5;"></p>
+          <div style="margin-top: 1rem; text-align: center; font-size: 0.95rem; color: var(--text-muted);">
+            Estimated Reading Time: <strong id="res-reading-time" style="color: var(--primary-400);">0 sec</strong>
+          </div>
         </div>
       </div>
 
       <section class="tool-explainer">
         <h2>How It Works</h2>
-        <p>Current Attendance Percentage = <code>(Attended / Total) * 100</code>.</p>
-        <p style="margin-top: 0.5rem;">If your percentage is below target, the calculator finds the minimum additional consecutive classes you must attend: <code>Math.ceil((Target * Total - 100 * Attended) / (100 - Target))</code>.</p>
-        <p style="margin-top: 0.5rem;">If your percentage exceeds target, it computes how many upcoming classes you can safely miss without dropping below your goal: <code>Math.floor((100 * Attended - Target * Total) / Target)</code>.</p>
+        <p>Words are parsed by whitespace boundaries. Reading time is estimated at an average student reading speed of 200 words per minute.</p>
       </section>
 
       <section class="related-tools-section">
-        <h3 class="related-tools-title">Related Academic Tools</h3>
+        <h3 class="related-tools-title">Related Text Tools</h3>
         <div class="grid-3">
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Study Progress Calculator</h4>
-            <a href="/tools/study-progress-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Character Counter</h4>
+            <a href="/tools/character-counter" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">GPA Calculator</h4>
-            <a href="/tools/gpa-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Case Converter</h4>
+            <a href="/tools/case-converter" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
           <div class="card" style="padding: 1.25rem;">
-            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Marks Calculator</h4>
-            <a href="/tools/marks-calculator" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
+            <h4 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem;">Text Cleaner</h4>
+            <a href="/tools/text-cleaner" class="btn btn-outline btn-sm">Use Tool &rarr;</a>
           </div>
         </div>
       </section>
@@ -177,10 +168,8 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const toolId = 'attendance-calculator';
-      const calcBtn = document.getElementById('calc-btn');
-      const resetBtn = document.getElementById('reset-btn');
-      const resultBox = document.getElementById('result-box');
+      const toolId = 'word-counter';
+      const textInput = document.getElementById('text-input');
       const favBtn = document.getElementById('fav-btn');
       const favBtnText = document.getElementById('fav-btn-text');
 
@@ -205,46 +194,27 @@
         });
       }
 
-      calcBtn.addEventListener('click', () => {
-        const attended = parseInt(document.getElementById('attended-classes').value) || 0;
-        const total = parseInt(document.getElementById('total-classes').value) || 0;
-        const target = parseFloat(document.getElementById('target-percent').value) || 0;
+      function analyze() {
+        const text = textInput.value;
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        const chars = text.length;
+        const sentences = text.trim() ? text.split(/[.!?]+/).filter(s => s.trim().length > 0).length : 0;
+        const paragraphs = text.trim() ? text.split(/\n+/).filter(p => p.trim().length > 0).length : 0;
 
-        if (total <= 0 || attended > total) {
-          alert('Please enter valid class counts (Attended cannot exceed Total).');
-          return;
-        }
+        document.getElementById('res-words').textContent = words;
+        document.getElementById('res-chars').textContent = chars;
+        document.getElementById('res-sentences').textContent = sentences;
+        document.getElementById('res-paragraphs').textContent = paragraphs;
 
-        const currentP = (attended / total) * 100;
-        document.getElementById('res-current-p').textContent = currentP.toFixed(1) + '%';
-
-        const actionLabel = document.getElementById('res-action-label');
-        const actionCount = document.getElementById('res-action-count');
-        const statusMsg = document.getElementById('res-status-msg');
-
-        if (currentP >= target) {
-          const skippable = Math.floor((100 * attended - target * total) / target);
-          actionLabel.textContent = 'Classes You Can Bunk';
-          actionCount.textContent = Math.max(0, skippable);
-          statusMsg.innerHTML = skippable > 0
-            ? `Your attendance is currently above target! You can miss up to <strong>${skippable}</strong> consecutive class(es) and remain at or above ${target}%.`
-            : `Your attendance is right at your target requirement of ${target}%. Don't miss any upcoming classes!`;
+        const seconds = Math.ceil((words / 200) * 60);
+        if (seconds < 60) {
+          document.getElementById('res-reading-time').textContent = `${seconds} sec`;
         } else {
-          const needed = Math.ceil((target * total - 100 * attended) / (100 - target));
-          actionLabel.textContent = 'Classes Needed';
-          actionCount.textContent = Math.max(0, needed);
-          statusMsg.innerHTML = `Your attendance is currently below target. You need to attend the next <strong>${needed}</strong> consecutive class(es) to reach your target of ${target}%.`;
+          document.getElementById('res-reading-time').textContent = `${Math.round(seconds / 60)} min`;
         }
+      }
 
-        resultBox.style.display = 'block';
-      });
-
-      resetBtn.addEventListener('click', () => {
-        document.getElementById('attended-classes').value = '38';
-        document.getElementById('total-classes').value = '50';
-        document.getElementById('target-percent').value = '75';
-        resultBox.style.display = 'none';
-      });
+      textInput.addEventListener('input', analyze);
     });
   </script>
 </body>
