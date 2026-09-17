@@ -147,32 +147,150 @@
 /* Tool Cards & Favorite Toggle */
 .tool-card {
   position: relative;
+  overflow: hidden;
+  border-top: 4px solid var(--card-accent-color, var(--border-brand));
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-fast);
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12), 0 6px 12px -2px rgba(0, 0, 0, 0.08);
+}
+
+/* Category Accent Corner Stripe */
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--card-accent-color, var(--primary-400));
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Category Themes on Cards */
+.tool-card[data-category-theme="Academic"] {
+  --card-accent-color: var(--cat-academic-color);
+  --card-bg-subtle: var(--cat-academic-bg);
+  --card-border-subtle: var(--cat-academic-border);
+}
+.tool-card[data-category-theme="Math"] {
+  --card-accent-color: var(--cat-math-color);
+  --card-bg-subtle: var(--cat-math-bg);
+  --card-border-subtle: var(--cat-math-border);
+}
+.tool-card[data-category-theme="Time & Date"] {
+  --card-accent-color: var(--cat-time-color);
+  --card-bg-subtle: var(--cat-time-bg);
+  --card-border-subtle: var(--cat-time-border);
+}
+.tool-card[data-category-theme="Productivity"] {
+  --card-accent-color: var(--cat-prod-color);
+  --card-bg-subtle: var(--cat-prod-bg);
+  --card-border-subtle: var(--cat-prod-border);
+}
+.tool-card[data-category-theme="Text"] {
+  --card-accent-color: var(--cat-text-color);
+  --card-bg-subtle: var(--cat-text-bg);
+  --card-border-subtle: var(--cat-text-border);
+}
+.tool-card[data-category-theme="Image & File"] {
+  --card-accent-color: var(--cat-image-color);
+  --card-bg-subtle: var(--cat-image-bg);
+  --card-border-subtle: var(--cat-image-border);
+}
+.tool-card[data-category-theme="Other"] {
+  --card-accent-color: var(--cat-other-color);
+  --card-bg-subtle: var(--cat-other-bg);
+  --card-border-subtle: var(--cat-other-border);
+}
+
+[data-theme="dark"] .tool-card[data-category-theme="Academic"] { --card-bg-subtle: var(--cat-academic-dark-bg); --card-border-subtle: var(--cat-academic-dark-border); }
+[data-theme="dark"] .tool-card[data-category-theme="Math"] { --card-bg-subtle: var(--cat-math-dark-bg); --card-border-subtle: var(--cat-math-dark-border); }
+[data-theme="dark"] .tool-card[data-category-theme="Time & Date"] { --card-bg-subtle: var(--cat-time-dark-bg); --card-border-subtle: var(--cat-time-dark-border); }
+[data-theme="dark"] .tool-card[data-category-theme="Productivity"] { --card-bg-subtle: var(--cat-prod-dark-bg); --card-border-subtle: var(--cat-prod-dark-border); }
+[data-theme="dark"] .tool-card[data-category-theme="Text"] { --card-bg-subtle: var(--cat-text-dark-bg); --card-border-subtle: var(--cat-text-dark-border); }
+[data-theme="dark"] .tool-card[data-category-theme="Image & File"] { --card-bg-subtle: var(--cat-image-dark-bg); --card-border-subtle: var(--cat-image-dark-border); }
+[data-theme="dark"] .tool-card[data-category-theme="Other"] { --card-bg-subtle: var(--cat-other-dark-bg); --card-border-subtle: var(--cat-other-dark-border); }
+
+/* Card Icon Box Styling */
+.tool-card .card-icon {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: var(--radius-md);
+  background: var(--card-bg-subtle, var(--bg-accent-subtle));
+  color: var(--card-accent-color, var(--primary-400));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.85rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--card-border-subtle, rgba(56, 189, 248, 0.25));
+  box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.05);
+  transition: transform var(--transition-fast);
+}
+
+.tool-card:hover .card-icon {
+  transform: scale(1.08);
+}
+
+/* Matching Use Tool Button Styling */
+.tool-card .tool-use-btn {
+  border-color: var(--card-border-subtle, var(--border-brand));
+  color: var(--card-accent-color, var(--primary-400));
+  background-color: var(--card-bg-subtle, transparent);
+  font-weight: 600;
+}
+
+.tool-card .tool-use-btn:hover {
+  background-color: var(--card-accent-color, var(--primary-400));
+  color: #ffffff;
+  border-color: var(--card-accent-color, var(--primary-400));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .fav-toggle-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
+  top: 0.85rem;
+  right: 0.85rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--text-subtle);
   cursor: pointer;
-  padding: 0.4rem;
+  padding: 0.45rem;
   border-radius: 50%;
   transition: all var(--transition-fast);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
+  box-shadow: var(--shadow-sm);
 }
 
 .fav-toggle-btn:hover {
   color: #f59e0b;
-  background-color: var(--bg-muted);
+  border-color: #f59e0b;
+  background-color: #fef3c7;
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .fav-toggle-btn:hover {
+  background-color: rgba(245, 158, 11, 0.2);
 }
 
 .fav-toggle-btn.active {
   color: #f59e0b;
+  fill: #f59e0b;
+  border-color: #f59e0b;
+  background-color: #fffbeb;
+}
+
+[data-theme="dark"] .fav-toggle-btn.active {
+  background-color: rgba(245, 158, 11, 0.25);
 }
 
 .tool-card-categories {
@@ -183,9 +301,26 @@
 }
 
 .badge-sm {
-  font-size: 0.7rem;
-  padding: 0.15rem 0.5rem;
+  font-size: 0.725rem;
+  padding: 0.2rem 0.6rem;
 }
+
+/* Category Badge Color Overrides */
+.badge-academic { background-color: var(--cat-academic-bg); color: var(--cat-academic-color); border-color: var(--cat-academic-border); }
+.badge-math { background-color: var(--cat-math-bg); color: var(--cat-math-color); border-color: var(--cat-math-border); }
+.badge-time { background-color: var(--cat-time-bg); color: var(--cat-time-color); border-color: var(--cat-time-border); }
+.badge-prod { background-color: var(--cat-prod-bg); color: var(--cat-prod-color); border-color: var(--cat-prod-border); }
+.badge-text { background-color: var(--cat-text-bg); color: var(--cat-text-color); border-color: var(--cat-text-border); }
+.badge-image { background-color: var(--cat-image-bg); color: var(--cat-image-color); border-color: var(--cat-image-border); }
+.badge-other { background-color: var(--cat-other-bg); color: var(--cat-other-color); border-color: var(--cat-other-border); }
+
+[data-theme="dark"] .badge-academic { background-color: var(--cat-academic-dark-bg); border-color: var(--cat-academic-dark-border); }
+[data-theme="dark"] .badge-math { background-color: var(--cat-math-dark-bg); border-color: var(--cat-math-dark-border); }
+[data-theme="dark"] .badge-time { background-color: var(--cat-time-dark-bg); border-color: var(--cat-time-dark-border); }
+[data-theme="dark"] .badge-prod { background-color: var(--cat-prod-dark-bg); border-color: var(--cat-prod-dark-border); }
+[data-theme="dark"] .badge-text { background-color: var(--cat-text-dark-bg); border-color: var(--cat-text-dark-border); }
+[data-theme="dark"] .badge-image { background-color: var(--cat-image-dark-bg); border-color: var(--cat-image-dark-border); }
+[data-theme="dark"] .badge-other { background-color: var(--cat-other-dark-bg); border-color: var(--cat-other-dark-border); }
 
 /* Breadcrumbs */
 .breadcrumb {

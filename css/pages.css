@@ -239,45 +239,56 @@
   margin-bottom: 2.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .tools-search-box {
   position: relative;
-  max-width: 36rem;
+  max-width: 42rem;
   margin: 0 auto;
   width: 100%;
 }
 
 .tools-search-box input {
-  padding-left: 3rem;
-  padding-right: 1rem;
-  height: 3.25rem;
-  font-size: 1rem;
+  padding-left: 3.5rem;
+  padding-right: 1.25rem;
+  height: 3.75rem;
+  font-size: 1.05rem;
   border-radius: var(--radius-lg);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  transition: all var(--transition-fast);
+}
+
+.tools-search-box input:focus {
+  border-color: var(--primary-400);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
 }
 
 .tools-search-box svg {
   position: absolute;
-  left: 1rem;
+  left: 1.25rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--text-muted);
+  color: var(--primary-400);
   pointer-events: none;
+  width: 22px;
+  height: 22px;
 }
 
 .category-pills {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
 }
 
 .filter-btn {
-  padding: 0.45rem 1rem;
+  padding: 0.55rem 1.15rem;
   border-radius: var(--radius-full);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
   border: 1px solid var(--border-color);
   background-color: var(--bg-surface);
@@ -286,19 +297,84 @@
   transition: all var(--transition-fast);
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.45rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .filter-btn:hover {
-  border-color: var(--border-brand);
-  color: var(--primary-400);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--btn-accent-color, var(--border-brand));
+  color: var(--btn-accent-color, var(--primary-400));
 }
 
 .filter-btn.active {
-  background-color: var(--bg-accent-subtle);
-  border-color: var(--border-brand);
-  color: var(--primary-400);
+  background-color: var(--btn-accent-color, var(--primary-500));
+  border-color: var(--btn-accent-color, var(--primary-500));
+  color: #ffffff;
   font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Category Specific Color Buttons for Filter Pills */
+.filter-btn[data-category="Academic"] { --btn-accent-color: var(--cat-academic-color); background-color: var(--cat-academic-bg); border-color: var(--cat-academic-border); color: var(--cat-academic-color); }
+.filter-btn[data-category="Math"] { --btn-accent-color: var(--cat-math-color); background-color: var(--cat-math-bg); border-color: var(--cat-math-border); color: var(--cat-math-color); }
+.filter-btn[data-category="Time & Date"] { --btn-accent-color: var(--cat-time-color); background-color: var(--cat-time-bg); border-color: var(--cat-time-border); color: var(--cat-time-color); }
+.filter-btn[data-category="Productivity"] { --btn-accent-color: var(--cat-prod-color); background-color: var(--cat-prod-bg); border-color: var(--cat-prod-border); color: var(--cat-prod-color); }
+.filter-btn[data-category="Text"] { --btn-accent-color: var(--cat-text-color); background-color: var(--cat-text-bg); border-color: var(--cat-text-border); color: var(--cat-text-color); }
+.filter-btn[data-category="Image & File"] { --btn-accent-color: var(--cat-image-color); background-color: var(--cat-image-bg); border-color: var(--cat-image-border); color: var(--cat-image-color); }
+.filter-btn[data-category="Other"] { --btn-accent-color: var(--cat-other-color); background-color: var(--cat-other-bg); border-color: var(--cat-other-border); color: var(--cat-other-color); }
+
+[data-theme="dark"] .filter-btn[data-category="Academic"] { background-color: var(--cat-academic-dark-bg); border-color: var(--cat-academic-dark-border); }
+[data-theme="dark"] .filter-btn[data-category="Math"] { background-color: var(--cat-math-dark-bg); border-color: var(--cat-math-dark-border); }
+[data-theme="dark"] .filter-btn[data-category="Time & Date"] { background-color: var(--cat-time-dark-bg); border-color: var(--cat-time-dark-border); }
+[data-theme="dark"] .filter-btn[data-category="Productivity"] { background-color: var(--cat-prod-dark-bg); border-color: var(--cat-prod-dark-border); }
+[data-theme="dark"] .filter-btn[data-category="Text"] { background-color: var(--cat-text-dark-bg); border-color: var(--cat-text-dark-border); }
+[data-theme="dark"] .filter-btn[data-category="Image & File"] { background-color: var(--cat-image-dark-bg); border-color: var(--cat-image-dark-border); }
+[data-theme="dark"] .filter-btn[data-category="Other"] { background-color: var(--cat-other-dark-bg); border-color: var(--cat-other-dark-border); }
+
+/* Stats Banner Section Styling */
+.tools-stats-banner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.stat-icon-wrapper {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.stat-info-num {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.stat-info-label {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .empty-state-card {
