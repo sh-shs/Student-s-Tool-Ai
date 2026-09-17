@@ -98,4 +98,82 @@
   .final-cta-box .hero-cta {
     flex-direction: column;
   }
+
+  /* AI Page Mobile & Tablet Responsive Layout */
+  .ai-layout-wrapper {
+    flex-direction: column;
+  }
+
+  .ai-chat-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 990;
+    border-radius: 0;
+    transform: translateX(-100%);
+  }
+
+  .ai-chat-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close-btn {
+    display: flex;
+  }
+
+  .chips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-chat-card {
+    min-height: 550px;
+    height: calc(100vh - 11rem);
+    border-radius: 12px;
+  }
+
+  .chat-bubble {
+    max-width: 90%;
+  }
+
+  .ai-chat-header {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .ai-chat-header-left {
+    gap: 0.5rem;
+  }
+
+  .assistant-title {
+    font-size: 0.9rem;
+  }
+
+  .assistant-status {
+    font-size: 0.75rem;
+  }
+
+  .ai-chat-header-actions .btn {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-chat-header-actions .btn span {
+    display: none;
+  }
+
+  .ai-empty-state {
+    padding: 1.75rem 1rem;
+  }
+
+  .ai-empty-state h2 {
+    font-size: 1.25rem;
+  }
+
+  .prompt-chip {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.85rem;
+  }
 }

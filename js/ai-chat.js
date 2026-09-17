@@ -1,7 +1,7 @@
 /**
  * AI Chat Controller - UI Interaction & Chat Logic
  * Manages chat history, input auto-resize, attachment handling, auto-scrolling,
- * rendering formatted messages, prompt suggestions, and error/loading states.
+ * rendering formatted messages, prompt suggestions, sidebar toggle, and error/loading states.
  */
 
 (function () {
@@ -23,6 +23,7 @@
   let sendBtn, attachImgBtn, attachFileBtn, imgFileInput, docFileInput;
   let attachmentPreviewsContainer, inlineErrorBanner, newChatBtn, clearChatBtn;
   let clearModal, clearModalConfirmBtn, clearModalCancelBtn;
+  let sidebarToggleBtn, chatSidebar, sidebarCloseBtn, sidebarOverlay, sidebarNewChatBtn;
 
   document.addEventListener('DOMContentLoaded', () => {
     initDOMElements();
@@ -51,6 +52,12 @@
     clearModal = document.getElementById('clear-modal');
     clearModalConfirmBtn = document.getElementById('clear-modal-confirm');
     clearModalCancelBtn = document.getElementById('clear-modal-cancel');
+
+    sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+    chatSidebar = document.getElementById('chat-sidebar');
+    sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+    sidebarOverlay = document.getElementById('sidebar-overlay');
+    sidebarNewChatBtn = document.getElementById('sidebar-new-chat-btn');
   }
 
   function bindEvents() {
@@ -71,11 +78,40 @@
     });
 
     // Attachment triggers
-    attachImgBtn.addEventListener('click', () => imgFileInput.click());
-    attachFileBtn.addEventListener('click', () => docFileInput.click());
+    if (attachImgBtn) attachImgBtn.addEventListener('click', () => imgFileInput.click());
+    if (attachFileBtn) attachFileBtn.addEventListener('click', () => docFileInput.click());
 
-    imgFileInput.addEventListener('change', handleImageSelected);
-    docFileInput.addEventListener('change', handleFileSelected);
+    if (imgFileInput) imgFileInput.addEventListener('change', handleImageSelected);
+    if (docFileInput) docFileInput.addEventListener('change', handleFileSelected);
+
+    // Sidebar Toggle & Actions
+    if (sidebarToggleBtn) {
+      sidebarToggleBtn.addEventListener('click', toggleSidebar);
+    }
+
+    if (sidebarCloseBtn) {
+      sidebarCloseBtn.addEventListener('click', closeSidebar);
+    }
+
+    if (sidebarOverlay) {
+      sidebarOverlay.addEventListener('click', closeSidebar);
+    }
+
+    if (sidebarNewChatBtn) {
+      sidebarNewChatBtn.addEventListener('click', () => {
+        resetChat();
+        closeSidebar();
+      });
+    }
+
+    // Chat History items
+    document.querySelectorAll('.history-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.history-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        closeSidebar();
+      });
+    });
 
     // Prompt Chips in Empty State
     document.querySelectorAll('.prompt-chip').forEach(chip => {
@@ -87,7 +123,7 @@
       });
     });
 
-    // New Chat & Clear Chat
+    // New Chat & Clear Chat Header buttons
     if (newChatBtn) newChatBtn.addEventListener('click', resetChat);
     if (clearChatBtn) clearChatBtn.addEventListener('click', openClearModal);
 
@@ -100,6 +136,21 @@
         if (e.target === clearModal) closeClearModal();
       });
     }
+  }
+
+  function toggleSidebar() {
+    if (!chatSidebar) return;
+    if (window.innerWidth <= 768) {
+      chatSidebar.classList.toggle('open');
+      if (sidebarOverlay) sidebarOverlay.classList.toggle('active');
+    } else {
+      chatSidebar.classList.toggle('collapsed');
+    }
+  }
+
+  function closeSidebar() {
+    if (chatSidebar) chatSidebar.classList.remove('open');
+    if (sidebarOverlay) sidebarOverlay.classList.remove('active');
   }
 
   function handleTextareaInput() {
@@ -368,6 +419,9 @@
         `;
       } else if (msg.isError) {
         bubbleEl.innerHTML = `
+          <div class="ai-avatar-icon sm assistant-row-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 12a10 10 0 0 0 17.8 5.3z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
           <div class="chat-bubble assistant-bubble error-bubble">
             <div class="error-notice">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -383,7 +437,6 @@
         `;
 
         bubbleEl.querySelector('.retry-btn').addEventListener('click', () => {
-          // Remove the error message and re-try last prompt
           messages = messages.filter(m => m.id !== msg.id);
           renderChat();
           executeAIResponse(lastUserPrompt, lastUserAttachments);
@@ -403,6 +456,9 @@
         }
 
         bubbleEl.innerHTML = `
+          <div class="ai-avatar-icon sm assistant-row-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 12a10 10 0 0 0 17.8 5.3z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
           <div class="chat-bubble assistant-bubble">
             <div class="bubble-content markdown-body">${formattedHtml}</div>
 
@@ -444,7 +500,6 @@
         const regenBtn = bubbleEl.querySelector('.regenerate-btn');
         if (regenBtn) {
           regenBtn.addEventListener('click', () => {
-            // Remove last assistant message
             messages = messages.filter(m => m.id !== msg.id);
             renderChat();
             executeAIResponse(lastUserPrompt, lastUserAttachments);
@@ -463,6 +518,9 @@
       typingEl.id = 'typing-indicator-row';
       typingEl.className = 'chat-bubble-row assistant-row';
       typingEl.innerHTML = `
+        <div class="ai-avatar-icon sm assistant-row-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 12a10 10 0 0 0 17.8 5.3z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
         <div class="chat-bubble assistant-bubble typing-bubble">
           <div class="typing-dots">
             <span class="dot"></span>
