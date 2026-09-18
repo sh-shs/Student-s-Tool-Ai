@@ -47,6 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // If on /ai/ page, hide/remove bottom navbar, header, and footer as a fallback
+  if (window.location.pathname.includes('/ai/') || document.body.classList.contains('ai-page')) {
+    document.querySelector('.bottom-navbar')?.remove();
+    document.querySelector('.site-header')?.remove();
+    document.querySelector('.site-footer')?.remove();
+  }
+
   // Active Link Highlighting for Top Navigation and Bottom Navigation
   const normalizePath = (path) => {
     if (!path) return '';

@@ -493,7 +493,9 @@ body.ai-page header.site-header,
 body.ai-page footer.site-footer,
 body.ai-page .bottom-navbar,
 body.ai-page .mobile-menu-toggle,
-body.ai-page .hamburger-menu {
+body.ai-page .hamburger-menu,
+body.ai-page .site-header,
+body.ai-page .site-footer {
   display: none !important;
 }
 
