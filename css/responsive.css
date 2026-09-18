@@ -248,9 +248,13 @@
     flex-direction: column;
   }
 
-  /* AI Page Mobile & Tablet Responsive Layout */
+  /* AI Page Mobile & Tablet Responsive Layout Override */
+  body.ai-page {
+    padding-bottom: 0 !important;
+  }
+
   .ai-layout-wrapper {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .ai-chat-sidebar {
@@ -258,6 +262,7 @@
     top: 0;
     left: 0;
     height: 100vh;
+    height: 100dvh;
     width: 280px;
     z-index: 990;
     border-radius: 0;
@@ -272,14 +277,12 @@
     display: flex;
   }
 
-  .chips-grid {
-    grid-template-columns: 1fr;
-  }
-
   .ai-chat-card {
-    min-height: 550px;
-    height: calc(100vh - 11rem);
-    border-radius: 12px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
   }
 
   .chat-bubble,
@@ -288,12 +291,7 @@
   }
 
   .ai-page-section {
-    padding-top: 0.75rem;
-    padding-bottom: 1.5rem;
-  }
-
-  .ai-section-header {
-    margin-bottom: 1rem;
+    padding: 0 !important;
   }
 
   .ai-messages-log {
@@ -301,28 +299,7 @@
   }
 
   .ai-chat-footer {
-    padding: 0.75rem 0.85rem;
-  }
-
-  .ai-chat-header {
-    padding: 0.75rem 0.85rem;
-  }
-
-  .ai-chat-header-left {
-    gap: 0.5rem;
-  }
-
-  .assistant-title {
-    font-size: 0.9rem;
-  }
-
-  .assistant-status {
-    font-size: 0.75rem;
-  }
-
-  .ai-chat-header-actions .btn {
-    padding: 0.35rem 0.6rem;
-    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem 0.85rem 0.75rem;
   }
 }
 
