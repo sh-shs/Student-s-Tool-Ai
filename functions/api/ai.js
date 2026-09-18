@@ -3,9 +3,10 @@
  * Handles AI chat requests by proxying them securely to the Google Gemini API.
  */
 
+import { GEMINI_API_KEY } from "../_config.js";
+
 // Simple in-memory rate limiting map (IP -> array of timestamps)
 // Note: In Cloudflare's serverless environment, in-memory state is maintained per worker instance.
-// For production persistence across distributed edge locations, upgrading to Cloudflare KV or Durable Objects is recommended.
 const ipRequestMap = new Map();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
 const MAX_REQUESTS_PER_WINDOW = 15;      // Max 15 requests per minute per IP
@@ -27,7 +28,7 @@ function isRateLimited(clientIp) {
 }
 
 export async function onRequest(context) {
-  const { request, env } = context;
+  const { request } = context;
 
   // 1. Method Check: Reject non-POST requests with HTTP 405 Method Not Allowed
   if (request.method !== 'POST') {
@@ -103,9 +104,8 @@ export async function onRequest(context) {
   }
 
   // 4. API Key Verification
-  const apiKey = env.GEMINI_API_KEY;
-  if (!apiKey) {
-    // Log internally if needed, but return generic error to client
+  const apiKey = GEMINI_API_KEY;
+  if (!apiKey || apiKey === 'PASTE_YOUR_KEY_HERE' || apiKey.trim() === '') {
     return new Response(JSON.stringify({ error: 'AI service unavailable' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' }

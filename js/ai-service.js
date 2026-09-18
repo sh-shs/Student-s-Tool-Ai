@@ -11,10 +11,6 @@
    * @returns {Promise<{text: string, timestamp: string}>}
    */
   async function getAIResponse(message, attachments = []) {
-    // TODO: Multimodal/attachment handling with Gemini API.
-    // Currently, attachments are received but multimodal request payloads require a different request shape (inlineData / fileData).
-    // The UI handles notifying users about supported file types.
-
     const response = await fetch('/api/ai', {
       method: 'POST',
       headers: {
