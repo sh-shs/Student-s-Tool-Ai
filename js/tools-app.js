@@ -142,18 +142,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       return `
         <div class="card tool-card" data-tool-id="${tool.id}" data-category-theme="${primaryCategory}">
-          <button class="fav-toggle-btn ${isFav ? 'active' : ''}" data-tool-id="${tool.id}" aria-label="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="${isFav ? '#f59e0b' : 'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </button>
-          <div class="card-icon" title="${tool.name}">
-            ${tool.icon}
-          </div>
-          <div class="tool-card-categories">
-            ${tool.categories.map(c => `<span class="badge badge-sm ${getBadgeClass(c)}">${c}</span>`).join(' ')}
+          <div class="tool-card-header">
+            <div class="card-icon" title="${tool.name}">
+              ${tool.icon}
+            </div>
+            <button class="fav-toggle-btn ${isFav ? 'active' : ''}" data-tool-id="${tool.id}" aria-label="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="${isFav ? '#f59e0b' : 'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </button>
           </div>
           <h3 class="card-title">${tool.emoji ? tool.emoji + ' ' : ''}${tool.name}</h3>
-          <p class="card-desc">${tool.description}</p>
-          <a href="${tool.url}" class="btn btn-outline btn-sm tool-use-btn" data-tool-id="${tool.id}">Use Tool &rarr;</a>
+          <p class="card-desc line-clamp">${tool.description}</p>
+          <div class="tool-card-footer">
+            <a href="${tool.url}" class="btn btn-outline btn-sm tool-use-btn" data-tool-id="${tool.id}">Use Tool &rarr;</a>
+            <div class="tool-brand-tag" title="Student's Tool & AI">
+              <img src="../assets/images/logo-icon.png" alt="" class="tool-brand-logo">
+            </div>
+          </div>
         </div>
       `;
     }).join('');

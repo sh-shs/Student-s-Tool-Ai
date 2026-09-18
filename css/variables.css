@@ -31,50 +31,50 @@
   --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.35);
 
   /* Category Colors (7 Requirements) */
-  /* ACADEMIC - Blue */
-  --cat-academic-color: #2563eb;
+  /* ACADEMIC - Blue (#3B82F6) */
+  --cat-academic-color: #3b82f6;
   --cat-academic-bg: #eff6ff;
   --cat-academic-border: #bfdbfe;
-  --cat-academic-dark-bg: rgba(37, 99, 235, 0.18);
+  --cat-academic-dark-bg: rgba(59, 130, 246, 0.18);
   --cat-academic-dark-border: rgba(59, 130, 246, 0.4);
 
-  /* MATH - Purple */
-  --cat-math-color: #9333ea;
-  --cat-math-bg: #faf5ff;
-  --cat-math-border: #e9d5ff;
-  --cat-math-dark-bg: rgba(147, 51, 234, 0.18);
-  --cat-math-dark-border: rgba(168, 85, 247, 0.4);
+  /* MATH - Purple (#8B5CF6) */
+  --cat-math-color: #8b5cf6;
+  --cat-math-bg: #f5f3ff;
+  --cat-math-border: #ddd6fe;
+  --cat-math-dark-bg: rgba(139, 92, 246, 0.18);
+  --cat-math-dark-border: rgba(139, 92, 246, 0.4);
 
-  /* TIME & DATE - Orange */
-  --cat-time-color: #ea580c;
+  /* TIME & DATE - Orange (#F97316) */
+  --cat-time-color: #f97316;
   --cat-time-bg: #fff7ed;
   --cat-time-border: #fed7aa;
-  --cat-time-dark-bg: rgba(234, 88, 12, 0.18);
+  --cat-time-dark-bg: rgba(249, 115, 22, 0.18);
   --cat-time-dark-border: rgba(249, 115, 22, 0.4);
 
-  /* PRODUCTIVITY - Green */
-  --cat-prod-color: #16a34a;
+  /* PRODUCTIVITY - Green (#22C55E) */
+  --cat-prod-color: #22c55e;
   --cat-prod-bg: #f0fdf4;
   --cat-prod-border: #bbf7d0;
-  --cat-prod-dark-bg: rgba(22, 163, 74, 0.18);
+  --cat-prod-dark-bg: rgba(34, 197, 94, 0.18);
   --cat-prod-dark-border: rgba(34, 197, 94, 0.4);
 
-  /* TEXT - Pink */
-  --cat-text-color: #db2777;
+  /* TEXT - Pink (#EC4899) */
+  --cat-text-color: #ec4899;
   --cat-text-bg: #fdf2f8;
   --cat-text-border: #fbcfe8;
-  --cat-text-dark-bg: rgba(219, 39, 119, 0.18);
+  --cat-text-dark-bg: rgba(236, 72, 153, 0.18);
   --cat-text-dark-border: rgba(236, 72, 153, 0.4);
 
-  /* IMAGE & FILE - Cyan */
-  --cat-image-color: #0891b2;
+  /* IMAGE & FILE - Cyan (#06B6D4) */
+  --cat-image-color: #06b6d4;
   --cat-image-bg: #ecfeff;
   --cat-image-border: #a5f3fc;
-  --cat-image-dark-bg: rgba(8, 145, 178, 0.18);
+  --cat-image-dark-bg: rgba(6, 182, 212, 0.18);
   --cat-image-dark-border: rgba(6, 182, 212, 0.4);
 
-  /* OTHER - Gray */
-  --cat-other-color: #4b5563;
+  /* OTHER - Gray (#6B7280) */
+  --cat-other-color: #6b7280;
   --cat-other-bg: #f9fafb;
   --cat-other-border: #e5e7eb;
   --cat-other-dark-bg: rgba(107, 114, 128, 0.18);
