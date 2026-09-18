@@ -250,15 +250,13 @@
 
   /* AI Page Mobile & Tablet Responsive Layout Override */
   body.ai-page {
-    padding-bottom: 0 !important;
-  }
-
-  body.ai-page .bottom-navbar {
-    display: none !important;
+    padding-bottom: calc(65px + env(safe-area-inset-bottom)) !important;
   }
 
   .ai-layout-wrapper {
     flex-direction: row;
+    height: calc(100vh - 65px - env(safe-area-inset-bottom));
+    height: calc(100dvh - 65px - env(safe-area-inset-bottom));
   }
 
   .ai-chat-sidebar {
@@ -282,10 +280,12 @@
   }
 
   .ai-chat-card {
-    min-height: 100vh;
-    min-height: 100dvh;
-    height: 100vh;
-    height: 100dvh;
+    min-height: calc(100vh - 65px - env(safe-area-inset-bottom));
+    min-height: calc(100dvh - 65px - env(safe-area-inset-bottom));
+    height: calc(100vh - 65px - env(safe-area-inset-bottom));
+    height: calc(100dvh - 65px - env(safe-area-inset-bottom));
+    max-height: calc(100vh - 65px - env(safe-area-inset-bottom));
+    max-height: calc(100dvh - 65px - env(safe-area-inset-bottom));
     border-radius: 0;
   }
 
@@ -295,6 +295,8 @@
 
   .ai-page-section {
     padding: 0 !important;
+    height: calc(100vh - 65px - env(safe-area-inset-bottom)) !important;
+    height: calc(100dvh - 65px - env(safe-area-inset-bottom)) !important;
   }
 
   .ai-messages-log {
