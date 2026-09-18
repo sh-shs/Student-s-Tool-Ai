@@ -183,8 +183,26 @@
     border-radius: 12px;
   }
 
-  .chat-bubble {
+  .chat-bubble,
+  .assistant-bubble {
     max-width: 90%;
+  }
+
+  .ai-page-section {
+    padding-top: 0.75rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .ai-section-header {
+    margin-bottom: 1rem;
+  }
+
+  .ai-messages-log {
+    padding: 1rem 0.85rem;
+  }
+
+  .ai-chat-footer {
+    padding: 0.75rem 0.85rem;
   }
 
   .ai-chat-header {
