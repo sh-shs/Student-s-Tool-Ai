@@ -1,13 +1,15 @@
 /**
- * AI Chat Controller - UI Interaction & Chat Logic
+ * AI Chat Controller - UI Interaction & Chat Logic (Claude AI Style)
  * Manages chat history with persistence (edit, delete, create), input auto-resize,
- * attachment handling, auto-scrolling, rendering formatted messages, prompt suggestions,
+ * attachment handling, dynamic time-based greeting, quick actions, model selector,
+ * mode selector, voice/waveform triggers, auto-scrolling, rendering formatted messages,
  * sidebar toggle, copy & regenerate actions, and error/loading states.
  */
 
 (function () {
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
   const STORAGE_KEY = 'ai_study_assistant_chats_v1';
+  const MODEL_STORAGE_KEY = 'ai_assistant_selected_model';
 
   // Allowed file MIME types and extensions
   const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -20,21 +22,28 @@
   let isLoading = false;
   let lastUserPrompt = '';
   let lastUserAttachments = [];
+  let selectedModel = 'Gemini 2.5 Flash';
+  let selectedMode = 'Chat';
 
   // DOM Elements
   let chatContainer, messagesContainer, emptyStateContainer, inputArea, promptTextarea;
-  let sendBtn, attachImgBtn, attachFileBtn, imgFileInput, docFileInput;
+  let sendBtn, attachPlusBtn, attachMenuDropdown, attachImgBtn, attachFileBtn, imgFileInput, docFileInput;
+  let modeSelectorBtn, modeDropdownMenu, currentModeLabel;
+  let modelSelectorBtn, modelDropdownMenu, currentModelLabel;
+  let voiceInputBtn, waveformBtn;
   let attachmentPreviewsContainer, inlineErrorBanner, newChatBtn, clearChatBtn;
   let clearModal, clearModalConfirmBtn, clearModalCancelBtn;
   let sidebarToggleBtn, chatSidebar, sidebarCloseBtn, sidebarOverlay, sidebarNewChatBtn;
-  let chatHistoryList;
+  let chatHistoryList, greetingTitle;
 
   document.addEventListener('DOMContentLoaded', () => {
     initDOMElements();
     if (!chatContainer) return; // Not on AI page
 
+    loadModelPreference();
     loadChatHistoryFromStorage();
     bindEvents();
+    updateGreetingTitle();
     renderChatHistoryList();
     renderChat();
   });
@@ -46,10 +55,25 @@
     inputArea = document.getElementById('chat-input-area');
     promptTextarea = document.getElementById('chat-prompt-textarea');
     sendBtn = document.getElementById('chat-send-btn');
+
+    attachPlusBtn = document.getElementById('attach-plus-btn');
+    attachMenuDropdown = document.getElementById('attach-menu-dropdown');
     attachImgBtn = document.getElementById('attach-img-btn');
     attachFileBtn = document.getElementById('attach-file-btn');
     imgFileInput = document.getElementById('img-file-input');
     docFileInput = document.getElementById('doc-file-input');
+
+    modeSelectorBtn = document.getElementById('mode-selector-btn');
+    modeDropdownMenu = document.getElementById('mode-dropdown-menu');
+    currentModeLabel = document.getElementById('current-mode-label');
+
+    modelSelectorBtn = document.getElementById('model-selector-btn');
+    modelDropdownMenu = document.getElementById('model-dropdown-menu');
+    currentModelLabel = document.getElementById('current-model-label');
+
+    voiceInputBtn = document.getElementById('voice-input-btn');
+    waveformBtn = document.getElementById('waveform-btn');
+
     attachmentPreviewsContainer = document.getElementById('attachment-previews');
     inlineErrorBanner = document.getElementById('attachment-error-banner');
     newChatBtn = document.getElementById('new-chat-btn');
@@ -65,6 +89,43 @@
     sidebarOverlay = document.getElementById('sidebar-overlay');
     sidebarNewChatBtn = document.getElementById('sidebar-new-chat-btn');
     chatHistoryList = document.getElementById('chat-history-list');
+    greetingTitle = document.getElementById('greeting-title');
+  }
+
+  /* Time-based greeting updater */
+  function updateGreetingTitle() {
+    if (!greetingTitle) return;
+    const hour = new Date().getHours();
+    let greetingText = 'Good afternoon';
+    if (hour >= 5 && hour < 12) {
+      greetingText = 'Good morning';
+    } else if (hour >= 12 && hour < 18) {
+      greetingText = 'Good afternoon';
+    } else {
+      greetingText = 'Good evening';
+    }
+
+    // Try reading user name if logged in or default to Student
+    const storedUser = localStorage.getItem('st_user_name') || 'Student';
+    greetingTitle.textContent = `${greetingText}, ${storedUser}`;
+  }
+
+  function loadModelPreference() {
+    const saved = localStorage.getItem(MODEL_STORAGE_KEY);
+    if (saved) {
+      selectedModel = saved;
+    }
+    if (currentModelLabel) {
+      currentModelLabel.textContent = selectedModel;
+    }
+    // Set active class in model dropdown items
+    document.querySelectorAll('.model-option-item').forEach(item => {
+      if (item.getAttribute('data-model') === selectedModel) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
   }
 
   /* Storage Operations */
@@ -135,12 +196,111 @@
       submitPrompt();
     });
 
-    // Attachment triggers
-    if (attachImgBtn) attachImgBtn.addEventListener('click', () => imgFileInput.click());
-    if (attachFileBtn) attachFileBtn.addEventListener('click', () => docFileInput.click());
+    // Attach (+) Plus Dropdown Toggle
+    if (attachPlusBtn && attachMenuDropdown) {
+      attachPlusBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        attachMenuDropdown.classList.toggle('show');
+      });
+    }
+
+    // Attachment triggers inside menu
+    if (attachImgBtn) {
+      attachImgBtn.addEventListener('click', () => {
+        if (attachMenuDropdown) attachMenuDropdown.classList.remove('show');
+        imgFileInput.click();
+      });
+    }
+    if (attachFileBtn) {
+      attachFileBtn.addEventListener('click', () => {
+        if (attachMenuDropdown) attachMenuDropdown.classList.remove('show');
+        docFileInput.click();
+      });
+    }
 
     if (imgFileInput) imgFileInput.addEventListener('change', handleImageSelected);
     if (docFileInput) docFileInput.addEventListener('change', handleFileSelected);
+
+    // Mode Selector Dropdown (Chat, Cowork)
+    if (modeSelectorBtn && modeDropdownMenu) {
+      modeSelectorBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        modeDropdownMenu.classList.toggle('show');
+      });
+
+      document.querySelectorAll('.mode-option-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectedMode = item.getAttribute('data-mode') || 'Chat';
+          if (currentModeLabel) currentModeLabel.textContent = selectedMode;
+          document.querySelectorAll('.mode-option-item').forEach(m => m.classList.remove('active'));
+          item.classList.add('active');
+          modeDropdownMenu.classList.remove('show');
+        });
+      });
+    }
+
+    // Model Selector Dropdown (Gemini 2.5 Flash, Gemini 3.6 Flash)
+    if (modelSelectorBtn && modelDropdownMenu) {
+      modelSelectorBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        modelDropdownMenu.classList.toggle('show');
+      });
+
+      document.querySelectorAll('.model-option-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectedModel = item.getAttribute('data-model') || 'Gemini 2.5 Flash';
+          localStorage.setItem(MODEL_STORAGE_KEY, selectedModel);
+          if (currentModelLabel) currentModelLabel.textContent = selectedModel;
+          document.querySelectorAll('.model-option-item').forEach(m => m.classList.remove('active'));
+          item.classList.add('active');
+          modelDropdownMenu.classList.remove('show');
+        });
+      });
+    }
+
+    // Close open dropdowns on outside document click
+    document.addEventListener('click', () => {
+      if (attachMenuDropdown) attachMenuDropdown.classList.remove('show');
+      if (modeDropdownMenu) modeDropdownMenu.classList.remove('show');
+      if (modelDropdownMenu) modelDropdownMenu.classList.remove('show');
+    });
+
+    // Voice & Waveform Button Triggers
+    if (voiceInputBtn) {
+      voiceInputBtn.addEventListener('click', () => {
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+          showInlineError('Speech recognition is not supported in this browser.');
+          return;
+        }
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.onstart = () => {
+          voiceInputBtn.style.color = '#ef4444';
+        };
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          promptTextarea.value += (promptTextarea.value ? ' ' : '') + transcript;
+          handleTextareaInput();
+        };
+        recognition.onend = () => {
+          voiceInputBtn.style.color = '';
+        };
+        recognition.onerror = () => {
+          voiceInputBtn.style.color = '';
+          showInlineError('Could not process voice input. Please try again.');
+        };
+        recognition.start();
+      });
+    }
+
+    if (waveformBtn) {
+      waveformBtn.addEventListener('click', () => {
+        showInlineError('Audio waveform input feature ready.');
+      });
+    }
 
     // Sidebar Toggle & Actions
     if (sidebarToggleBtn) {
@@ -162,13 +322,15 @@
       });
     }
 
-    // Prompt Chips in Empty State
-    document.querySelectorAll('.prompt-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const promptText = chip.getAttribute('data-prompt') || chip.textContent.trim();
-        promptTextarea.value = promptText;
-        handleTextareaInput();
-        promptTextarea.focus();
+    // Quick Action Buttons in Claude Greeting Section
+    document.querySelectorAll('.quick-action-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const promptText = btn.getAttribute('data-prompt') || '';
+        if (promptText) {
+          promptTextarea.value = promptText;
+          handleTextareaInput();
+          promptTextarea.focus();
+        }
       });
     });
 
@@ -214,7 +376,7 @@
 
   function showInlineError(message) {
     if (!inlineErrorBanner) return;
-    inlineErrorBanner.textContent = message;
+    inlineErrorBanner.querySelector('span').textContent = message;
     inlineErrorBanner.style.display = 'flex';
     setTimeout(() => {
       inlineErrorBanner.style.display = 'none';
@@ -555,6 +717,7 @@
       emptyStateContainer.style.display = 'block';
       messagesContainer.style.display = 'none';
       messagesContainer.innerHTML = '';
+      updateGreetingTitle();
       return;
     }
 
@@ -759,6 +922,7 @@
   window.AIChat = {
     getSessions: () => chatSessions,
     getActiveSession,
-    startNewChatSession
+    startNewChatSession,
+    getSelectedModel: () => selectedModel
   };
 })();
