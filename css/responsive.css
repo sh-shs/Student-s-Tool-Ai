@@ -253,6 +253,10 @@
     padding-bottom: 0 !important;
   }
 
+  body.ai-page .bottom-navbar {
+    display: none !important;
+  }
+
   .ai-layout-wrapper {
     flex-direction: row;
   }

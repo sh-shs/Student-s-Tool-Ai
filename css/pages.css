@@ -489,11 +489,14 @@ body.ai-page {
 }
 
 /* Hide website chrome on AI page (Header, Footer, Bottom Navbar, Mobile Menu Toggle) */
+body.ai-page header,
+body.ai-page footer,
 body.ai-page header.site-header,
 body.ai-page footer.site-footer,
 body.ai-page .bottom-navbar,
 body.ai-page .mobile-menu-toggle,
 body.ai-page .hamburger-menu,
+body.ai-page .menu-toggle,
 body.ai-page .site-header,
 body.ai-page .site-footer {
   display: none !important;

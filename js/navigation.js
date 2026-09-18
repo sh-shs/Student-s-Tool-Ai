@@ -47,11 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // If on /ai/ page, hide/remove bottom navbar, header, and footer as a fallback
+  // If on /ai/ page, hide/remove bottom navbar, header, footer, and hamburger menu as a fallback
   if (window.location.pathname.includes('/ai/') || document.body.classList.contains('ai-page')) {
-    document.querySelector('.bottom-navbar')?.remove();
-    document.querySelector('.site-header')?.remove();
-    document.querySelector('.site-footer')?.remove();
+    const bottomNav = document.querySelector('.bottom-navbar');
+    if (bottomNav) {
+      bottomNav.style.display = 'none';
+      bottomNav.remove();
+    }
+    const header = document.querySelector('.site-header, header');
+    if (header) {
+      header.style.display = 'none';
+      header.remove();
+    }
+    const footer = document.querySelector('.site-footer, footer');
+    if (footer) {
+      footer.style.display = 'none';
+      footer.remove();
+    }
+    const hamburger = document.querySelector('.hamburger-menu, .mobile-menu-toggle, .menu-toggle');
+    if (hamburger) {
+      hamburger.style.display = 'none';
+    }
   }
 
   // Active Link Highlighting for Top Navigation and Bottom Navigation
