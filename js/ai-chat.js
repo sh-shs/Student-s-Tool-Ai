@@ -730,7 +730,7 @@
 
     messages.forEach(msg => {
       const bubbleEl = document.createElement('div');
-      bubbleEl.className = `chat-bubble-row ${msg.role === 'user' ? 'user-row' : 'assistant-row'}`;
+      bubbleEl.className = `message ${msg.role === 'user' ? 'user-message' : 'ai-message'}`;
 
       if (msg.role === 'user') {
         let attachmentsMarkup = '';
@@ -756,37 +756,35 @@
         }
 
         bubbleEl.innerHTML = `
-          <div class="chat-bubble user-bubble">
+          <div class="message-content">
             ${attachmentsMarkup}
-            <div class="bubble-text">${window.AIFormatter ? window.AIFormatter.escapeHtml(msg.content) : msg.content}</div>
-            <div class="bubble-meta">${msg.timestamp}</div>
+            <div class="message-text">${window.AIFormatter ? window.AIFormatter.escapeHtml(msg.content) : msg.content}</div>
+            <div class="message-time">${msg.timestamp}</div>
           </div>
         `;
       } else if (msg.isError) {
         bubbleEl.innerHTML = `
-          <div class="ai-avatar-icon sm assistant-row-avatar">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 12a10 10 0 0 0 17.8 5.3z"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
-          <div class="chat-bubble assistant-bubble error-bubble">
-            <div class="error-notice">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="avatar">🤖</div>
+          <div class="message-content error-message-content">
+            <div class="message-text error-text">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <span>${window.AIFormatter ? window.AIFormatter.escapeHtml(msg.content) : msg.content}</span>
             </div>
-            <div class="bubble-actions">
-              <button type="button" class="btn btn-outline btn-sm retry-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-                Retry
-              </button>
+            <div class="message-actions">
+              <button type="button" class="action-btn retry-btn" title="Retry">🔄 Retry</button>
             </div>
           </div>
         `;
 
-        bubbleEl.querySelector('.retry-btn').addEventListener('click', () => {
-          session.messages = session.messages.filter(m => m.id !== msg.id);
-          saveChatHistoryToStorage();
-          renderChat();
-          executeAIResponse(lastUserPrompt, lastUserAttachments);
-        });
+        const retryBtn = bubbleEl.querySelector('.retry-btn');
+        if (retryBtn) {
+          retryBtn.addEventListener('click', () => {
+            session.messages = session.messages.filter(m => m.id !== msg.id);
+            saveChatHistoryToStorage();
+            renderChat();
+            executeAIResponse(lastUserPrompt, lastUserAttachments);
+          });
+        }
       } else {
         const isLatestAssistant = msg.id === lastAssistantMsgId;
         const formattedHtml = window.AIFormatter ? window.AIFormatter.parseMarkdown(msg.content) : msg.content;
@@ -794,34 +792,18 @@
         let regenerateMarkup = '';
         if (isLatestAssistant) {
           regenerateMarkup = `
-            <button type="button" class="bubble-action-btn regenerate-btn" title="Regenerate response" aria-label="Regenerate response">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-              <span>Regenerate</span>
-            </button>
+            <button type="button" class="action-btn regenerate-btn" title="Regenerate">🔄</button>
           `;
         }
 
         bubbleEl.innerHTML = `
-          <div class="ai-avatar-icon sm assistant-row-avatar">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 12a10 10 0 0 0 17.8 5.3z"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
-          <div class="chat-bubble assistant-bubble">
-            <div class="bubble-content markdown-body">${formattedHtml}</div>
-
-            <div class="bubble-uncertainty-note">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <span>AI can make mistakes. Verify important information.</span>
-            </div>
-
-            <div class="bubble-footer">
-              <span class="bubble-meta">${msg.timestamp}</span>
-              <div class="bubble-actions">
-                <button type="button" class="bubble-action-btn copy-btn" title="Copy response" aria-label="Copy response">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                  <span>Copy</span>
-                </button>
-                ${regenerateMarkup}
-              </div>
+          <div class="avatar">🤖</div>
+          <div class="message-content">
+            <div class="message-text markdown-body">${formattedHtml}</div>
+            <div class="message-disclaimer">ℹ️ AI can make mistakes. Verify important information.</div>
+            <div class="message-actions">
+              <button type="button" class="action-btn copy-btn" title="Copy">📋</button>
+              ${regenerateMarkup}
             </div>
           </div>
         `;
@@ -831,11 +813,10 @@
         if (copyBtn) {
           copyBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(msg.content).then(() => {
-              const span = copyBtn.querySelector('span');
-              span.textContent = 'Copied!';
+              copyBtn.textContent = '✅';
               copyBtn.classList.add('copied');
               setTimeout(() => {
-                span.textContent = 'Copy';
+                copyBtn.textContent = '📋';
                 copyBtn.classList.remove('copied');
               }, 2000);
             });
@@ -863,12 +844,10 @@
     if (!typingEl) {
       typingEl = document.createElement('div');
       typingEl.id = 'typing-indicator-row';
-      typingEl.className = 'chat-bubble-row assistant-row';
+      typingEl.className = 'message ai-message typing-indicator-message';
       typingEl.innerHTML = `
-        <div class="ai-avatar-icon sm assistant-row-avatar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 12a10 10 0 0 0 17.8 5.3z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <div class="chat-bubble assistant-bubble typing-bubble">
+        <div class="avatar">🤖</div>
+        <div class="message-content typing-bubble">
           <div class="typing-dots">
             <span class="dot"></span>
             <span class="dot"></span>

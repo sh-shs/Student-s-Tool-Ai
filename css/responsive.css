@@ -285,8 +285,7 @@
     border-radius: 0;
   }
 
-  .chat-bubble,
-  .assistant-bubble {
+  .message {
     max-width: 90%;
   }
 
