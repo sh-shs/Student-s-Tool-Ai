@@ -3,7 +3,7 @@
  * Handles AI chat requests by proxying them securely to the Google Gemini API.
  */
 
-import { GEMINI_API_KEY } from "../_config.js";
+import { GEMINI_API_KEY as CONFIG_GEMINI_API_KEY } from "../_config.js";
 
 // Simple in-memory rate limiting map (IP -> array of timestamps)
 const ipRequestMap = new Map();
@@ -27,7 +27,10 @@ function isRateLimited(clientIp) {
 }
 
 export async function onRequest(context) {
-  const { request } = context;
+  const { request, env } = context;
+
+  // Retrieve Gemini API Key from Cloudflare Pages environment variables first, falling back to _config.js
+  const apiKey = env?.GEMINI_API_KEY || CONFIG_GEMINI_API_KEY;
 
   // 1. Method Check: Reject non-POST requests with HTTP 405 Method Not Allowed
   if (request.method !== 'POST') {
@@ -103,7 +106,7 @@ export async function onRequest(context) {
   }
 
   // 4. API Key Verification
-  if (!GEMINI_API_KEY || GEMINI_API_KEY === 'PASTE_YOUR_KEY_HERE') {
+  if (!apiKey || apiKey === 'PASTE_YOUR_KEY_HERE') {
     console.error('Gemini API key is not configured or still contains placeholder value.');
     return new Response(JSON.stringify({ error: 'AI service unavailable' }), {
       status: 503,
@@ -111,8 +114,8 @@ export async function onRequest(context) {
     });
   }
 
-  // 5. Call Gemini REST API
-  const geminiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+  // 5. Call Gemini REST API using active supported model gemini-3.5-flash
+  const geminiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
 
   const geminiPayload = {
     contents: [
@@ -132,7 +135,7 @@ export async function onRequest(context) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-goog-api-key': GEMINI_API_KEY
+        'x-goog-api-key': apiKey
       },
       body: JSON.stringify(geminiPayload),
       signal: controller.signal
