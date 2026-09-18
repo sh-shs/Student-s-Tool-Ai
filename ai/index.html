@@ -20,7 +20,6 @@
 
   <!-- AI Page Chrome Hiding CSS -->
   <style>
-    body.ai-page .bottom-navbar,
     body.ai-page .site-header,
     body.ai-page .site-footer,
     body.ai-page .hamburger-menu,
@@ -246,7 +245,7 @@
           </div>
 
           <!-- Chat Input Footer Area (Claude Style Input Box & Model Selector) -->
-          <div class="ai-chat-footer" id="chat-input-area">
+          <div class="ai-chat-footer chat-input-area" id="chat-input-area">
 
             <!-- Inline Error Banner -->
             <div class="attachment-error-banner" id="attachment-error-banner" style="display: none;">
@@ -435,12 +434,8 @@
   <script src="../js/main.js"></script>
 
   <script>
-    // AI পেজে সাইটের হেডার, ফুটার, Bottom Navbar লুকান
+    // AI পেজে সাইটের হেডার, ফুটার লুকান
     document.addEventListener('DOMContentLoaded', function() {
-      // Bottom Navbar
-      const bottomNav = document.querySelector('.bottom-navbar');
-      if (bottomNav) bottomNav.style.display = 'none';
-
       // Site Header
       const header = document.querySelector('.site-header, header');
       if (header) header.style.display = 'none';

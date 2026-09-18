@@ -47,13 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // If on /ai/ page, hide/remove bottom navbar, header, footer, and hamburger menu as a fallback
+  // If on /ai/ page, hide/remove header, footer, and hamburger menu as a fallback
   if (window.location.pathname.includes('/ai/') || document.body.classList.contains('ai-page')) {
-    const bottomNav = document.querySelector('.bottom-navbar');
-    if (bottomNav) {
-      bottomNav.style.display = 'none';
-      bottomNav.remove();
-    }
     const header = document.querySelector('.site-header, header');
     if (header) {
       header.style.display = 'none';
