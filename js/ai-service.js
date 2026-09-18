@@ -5,43 +5,49 @@
 
 (function () {
   /**
-   * Fetches an AI assistant response for a given user message and attachments.
+   * Fetches an AI assistant response for a given user message.
    * @param {string} message - User message input
-   * @param {Array<{name: string, type: string, fileType: 'image'|'file', dataUrl?: string, size?: number}>} attachments - Attached files/images
    * @returns {Promise<{text: string, timestamp: string}>}
    */
-  async function getAIResponse(message, attachments = []) {
-    // TODO: Multimodal/attachment handling with Gemini API.
-    // Currently, attachments are received but multimodal request payloads require a different request shape (inlineData / fileData).
-    // The UI handles notifying users about supported file types.
-
-    const response = await fetch('/api/ai', {
+  async function sendMessage(message) {
+    const res = await fetch('/api/ai', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message, attachments })
+      body: JSON.stringify({ message })
     });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || 'AI service unavailable');
-    }
+    const data = await res.json().catch(() => ({}));
 
-    const data = await response.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'AI service unavailable');
+    }
 
     if (!data || typeof data.reply !== 'string') {
       throw new Error('Invalid response received from AI service');
     }
 
+    return data.reply;
+  }
+
+  /**
+   * Wrapper function for UI compatibility
+   * @param {string} message
+   * @param {Array} attachments
+   * @returns {Promise<{text: string, timestamp: string}>}
+   */
+  async function getAIResponse(message, attachments = []) {
+    const reply = await sendMessage(message);
     return {
-      text: data.reply,
+      text: reply,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
   }
 
   // Export to global scope
   window.AIService = {
+    sendMessage,
     getAIResponse
   };
 })();
