@@ -47,14 +47,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Active Link Highlighting
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll('.nav-link');
+  // Active Link Highlighting for Top Navigation and Bottom Navigation
+  const normalizePath = (path) => {
+    if (!path) return '';
+    let p = path.replace(/index\.html$/, '');
+    if (p.length > 1 && p.endsWith('/')) {
+      p = p.slice(0, -1);
+    }
+    return p || '/';
+  };
 
+  const currentNormalized = normalizePath(window.location.pathname);
+
+  // Top Nav Links
+  const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPath || (currentPath === '/' && href === '/') || (currentPath.endsWith('/index.html') && href === '/')) {
+    const linkPath = normalizePath(link.pathname);
+    if (linkPath === currentNormalized || (currentNormalized.startsWith(linkPath) && linkPath !== '/')) {
       link.classList.add('active');
+    }
+  });
+
+  // Bottom Nav Bar Items
+  const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+  bottomNavItems.forEach(item => {
+    const itemPath = normalizePath(item.pathname);
+    if (itemPath === currentNormalized || (currentNormalized.startsWith(itemPath) && itemPath !== '/')) {
+      item.classList.add('active');
     }
   });
 });
