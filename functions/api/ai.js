@@ -38,7 +38,7 @@ export async function onRequestPost(context) {
       });
     }
 
-    const MODEL = 'gemini-2.0-flash';
+    const MODEL = 'gemini-3.6-flash';
     const URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
 
     const geminiRes = await fetch(URL, {
