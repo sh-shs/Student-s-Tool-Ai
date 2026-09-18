@@ -17,6 +17,17 @@
 
   <!-- Early Theme Controller Script -->
   <script src="../js/theme.js"></script>
+
+  <!-- AI Page Chrome Hiding CSS -->
+  <style>
+    body.ai-page .bottom-navbar,
+    body.ai-page .site-header,
+    body.ai-page .site-footer,
+    body.ai-page .hamburger-menu,
+    body.ai-page .mobile-menu-toggle {
+      display: none !important;
+    }
+  </style>
 </head>
 <body class="ai-page">
 
@@ -422,5 +433,26 @@
   <script src="../js/ai-service.js"></script>
   <script src="../js/ai-chat.js"></script>
   <script src="../js/main.js"></script>
+
+  <script>
+    // AI পেজে সাইটের হেডার, ফুটার, Bottom Navbar লুকান
+    document.addEventListener('DOMContentLoaded', function() {
+      // Bottom Navbar
+      const bottomNav = document.querySelector('.bottom-navbar');
+      if (bottomNav) bottomNav.style.display = 'none';
+
+      // Site Header
+      const header = document.querySelector('.site-header, header');
+      if (header) header.style.display = 'none';
+
+      // Footer
+      const footer = document.querySelector('.site-footer, footer');
+      if (footer) footer.style.display = 'none';
+
+      // Hamburger Menu
+      const hamburger = document.querySelector('.hamburger-menu, .mobile-menu-toggle, .menu-toggle');
+      if (hamburger) hamburger.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
