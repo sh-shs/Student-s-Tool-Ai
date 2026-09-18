@@ -3,9 +3,9 @@
  * Handles AI chat requests by proxying them securely to the Google Gemini API.
  */
 
+import { GEMINI_API_KEY } from "../_config.js";
+
 // Simple in-memory rate limiting map (IP -> array of timestamps)
-// Note: In Cloudflare's serverless environment, in-memory state is maintained per worker instance.
-// For production persistence across distributed edge locations, upgrading to Cloudflare KV or Durable Objects is recommended.
 const ipRequestMap = new Map();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
 const MAX_REQUESTS_PER_WINDOW = 15;      // Max 15 requests per minute per IP
@@ -27,7 +27,7 @@ function isRateLimited(clientIp) {
 }
 
 export async function onRequest(context) {
-  const { request, env } = context;
+  const { request } = context;
 
   // 1. Method Check: Reject non-POST requests with HTTP 405 Method Not Allowed
   if (request.method !== 'POST') {
@@ -103,9 +103,8 @@ export async function onRequest(context) {
   }
 
   // 4. API Key Verification
-  const apiKey = env.GEMINI_API_KEY;
-  if (!apiKey) {
-    // Log internally if needed, but return generic error to client
+  if (!GEMINI_API_KEY || GEMINI_API_KEY === 'PASTE_YOUR_KEY_HERE') {
+    console.error('Gemini API key is not configured or still contains placeholder value.');
     return new Response(JSON.stringify({ error: 'AI service unavailable' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' }
@@ -113,7 +112,7 @@ export async function onRequest(context) {
   }
 
   // 5. Call Gemini REST API
-  const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+  const geminiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
   const geminiPayload = {
     contents: [
@@ -132,7 +131,8 @@ export async function onRequest(context) {
     const response = await fetch(geminiEndpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-goog-api-key': GEMINI_API_KEY
       },
       body: JSON.stringify(geminiPayload),
       signal: controller.signal
@@ -141,6 +141,8 @@ export async function onRequest(context) {
     clearTimeout(timeoutId);
 
     if (!response.ok) {
+      const errorText = await response.text().catch(() => '');
+      console.error(`Gemini API call failed with status ${response.status}: ${errorText}`);
       return new Response(JSON.stringify({ error: 'AI service unavailable' }), {
         status: 502,
         headers: { 'Content-Type': 'application/json' }
@@ -151,6 +153,7 @@ export async function onRequest(context) {
     const replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!replyText) {
+      console.error('Gemini API response missing candidates/text:', JSON.stringify(data));
       return new Response(JSON.stringify({ error: 'AI service unavailable' }), {
         status: 502,
         headers: { 'Content-Type': 'application/json' }
@@ -164,6 +167,7 @@ export async function onRequest(context) {
 
   } catch (err) {
     clearTimeout(timeoutId);
+    console.error('Error while communicating with Gemini API:', err);
     return new Response(JSON.stringify({ error: 'AI service unavailable' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' }
