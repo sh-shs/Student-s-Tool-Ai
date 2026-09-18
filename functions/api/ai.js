@@ -108,14 +108,14 @@ export async function onRequest(context) {
   // 4. API Key Verification
   if (!apiKey || apiKey === 'PASTE_YOUR_KEY_HERE') {
     console.error('Gemini API key is not configured or still contains placeholder value.');
-    return new Response(JSON.stringify({ error: 'AI service unavailable' }), {
+    return new Response(JSON.stringify({ error: 'AI service unavailable. GEMINI_API_KEY environment variable is missing.' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' }
     });
   }
 
-  // 5. Call Gemini REST API using active supported model gemini-3.5-flash
-  const geminiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+  // 5. Call Gemini REST API using active supported model gemini-1.5-flash
+  const geminiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
   const geminiPayload = {
     contents: [

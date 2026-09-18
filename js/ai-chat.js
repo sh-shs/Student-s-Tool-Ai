@@ -358,7 +358,7 @@
         id: 'msg_' + Date.now(),
         role: 'assistant',
         isError: true,
-        content: "An unexpected error occurred while generating a response. Please try again.",
+        content: err?.message || "An unexpected error occurred while generating a response. Please try again.",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
 
