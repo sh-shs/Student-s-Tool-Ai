@@ -1,6 +1,7 @@
 /**
  * Cloudflare Pages Function: /api/ai
  * Handles AI chat requests by proxying them securely to the Google Gemini API.
+ * Uses a fallback array of Gemini models to handle model deprecation, availability, or quota limits.
  */
 
 export async function onRequestPost(context) {
@@ -38,38 +39,57 @@ export async function onRequestPost(context) {
       });
     }
 
-    const MODEL = 'gemini-2.0-flash';
-    const URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
+    const MODELS = [
+      'gemini-2.5-flash',
+      'gemini-2.0-flash-lite',
+      'gemini-1.5-flash',
+      'gemini-2.5-pro',
+      'gemini-1.5-pro',
+      'gemini-3.6-flash'
+    ];
 
-    const geminiRes = await fetch(URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [{ text: message }]
+    let lastErrorMessage = 'All AI model requests failed';
+
+    for (const model of MODELS) {
+      try {
+        const URL = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${API_KEY.trim()}`;
+
+        const geminiRes = await fetch(URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [{ text: message }]
+              }
+            ]
+          })
+        });
+
+        const data = await geminiRes.json().catch(() => ({}));
+
+        if (geminiRes.ok) {
+          const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (reply) {
+            return new Response(JSON.stringify({ reply, model }), {
+              status: 200,
+              headers: corsHeaders
+            });
           }
-        ]
-      })
-    });
-
-    const data = await geminiRes.json().catch(() => ({}));
-
-    if (!geminiRes.ok) {
-      return new Response(JSON.stringify({
-        error: data.error?.message || 'Gemini API error'
-      }), {
-        status: geminiRes.status || 500,
-        headers: corsHeaders
-      });
+        } else {
+          lastErrorMessage = data.error?.message || `HTTP ${geminiRes.status} for model ${model}`;
+        }
+      } catch (e) {
+        lastErrorMessage = e.message || String(e);
+      }
     }
 
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response';
-
-    return new Response(JSON.stringify({ reply }), {
-      status: 200,
+    return new Response(JSON.stringify({
+      error: lastErrorMessage
+    }), {
+      status: 502,
       headers: corsHeaders
     });
 
