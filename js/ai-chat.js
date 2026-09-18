@@ -664,6 +664,10 @@
   }
 
   async function executeAIResponse(promptText, attachments) {
+    if (!promptText.trim() && (!attachments || attachments.length === 0)) {
+      return; // Do not send empty message
+    }
+
     isLoading = true;
     renderTypingIndicator();
     scrollToBottom();
@@ -800,7 +804,7 @@
           <div class="avatar">🤖</div>
           <div class="message-content">
             <div class="message-text markdown-body">${formattedHtml}</div>
-            <div class="message-disclaimer">ℹ️ AI can make mistakes. Verify important information.</div>
+            <div class="message-disclaimer">ℹ️ AI can make mistakes.</div>
             <div class="message-actions">
               <button type="button" class="action-btn copy-btn" title="Copy">📋</button>
               ${regenerateMarkup}
