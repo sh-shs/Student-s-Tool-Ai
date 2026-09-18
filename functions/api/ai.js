@@ -3,7 +3,7 @@
  * Handles AI chat requests by proxying them securely to the Google Gemini API.
  */
 
-import {AQ.Ab8RN6JX9wwo_fo1sWX2QFYzixsTIa6DRTZqldOfZkD9Lo4fvg} from "../_config.js";
+import { GEMINI_API_KEY } from "../_config.js";
 
 // Simple in-memory rate limiting map (IP -> array of timestamps)
 const ipRequestMap = new Map();
