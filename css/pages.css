@@ -1081,11 +1081,12 @@ body.ai-page .hamburger-menu {
   font-size: 1rem;
 }
 
-/* Chat Message Bubbles & Rows */
-.chat-bubble-row {
+/* Chat Message Styling (ChatGPT / Claude Style Premium Design) */
+.message {
   display: flex;
-  width: 100%;
-  gap: 0.85rem;
+  gap: 12px;
+  margin-bottom: 24px;
+  max-width: 80%;
   animation: messageFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -1100,81 +1101,126 @@ body.ai-page .hamburger-menu {
   }
 }
 
-.user-row {
-  justify-content: flex-end;
+.ai-message {
+  align-self: flex-start;
 }
 
-.assistant-row {
-  justify-content: flex-start;
-  align-items: flex-start;
+.user-message {
+  align-self: flex-end;
+  margin-left: auto;
 }
 
-.assistant-row-avatar {
+.avatar {
   width: 32px;
   height: 32px;
-  margin-top: 0.25rem;
-  background: linear-gradient(135deg, #0ea5e9, #10b981);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0EA5E9, #10B981);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+  color: #ffffff;
 }
 
-.chat-bubble {
-  max-width: 75%;
-  padding: 0.95rem 1.25rem;
+.message-content {
+  padding: 12px 16px;
   border-radius: 18px;
-  position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: #F7F7F8;
+  color: var(--text-main);
   word-break: break-word;
 }
 
-/* User Message Bubble: Blue Gradient as specified */
-.user-bubble {
-  background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
-  color: #ffffff;
-  border-bottom-right-radius: 4px;
+[data-theme="dark"] .message-content {
+  background: #1E1E1E;
+  color: #FFFFFF;
 }
 
-.user-bubble .bubble-text {
-  font-size: 0.95rem;
-  line-height: 1.55;
+.user-message .message-content {
+  background: linear-gradient(135deg, #0EA5E9, #10B981);
+  color: white;
+}
+
+.message-text {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.user-message .message-text {
   white-space: pre-wrap;
 }
 
-.user-bubble .bubble-meta {
-  font-size: 0.725rem;
-  color: rgba(255, 255, 255, 0.85);
-  margin-top: 0.45rem;
+.message-disclaimer {
+  font-size: 11px;
+  color: #888;
+  margin-top: 8px;
+}
+
+[data-theme="dark"] .message-disclaimer {
+  color: #888;
+}
+
+.message-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+[data-theme="dark"] .action-btn {
+  color: #AAAAAA;
+}
+
+.action-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .action-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.message-time {
+  font-size: 11px;
+  opacity: 0.7;
   text-align: right;
+  margin-top: 4px;
 }
 
-/* AI Message Bubble: Dark #1E1E1E in Dark Mode, #F1F5F9 in Light Mode */
-.assistant-bubble {
-  max-width: 80%;
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  color: #0f172a;
-  border-bottom-left-radius: 4px;
-}
-
-[data-theme="dark"] .assistant-bubble {
-  background-color: #1e1e1e;
-  border-color: #2a2a2a;
-  color: #ffffff;
-}
-
-/* Typing Indicator Bubble */
+/* Typing Indicator & Error Message Styling */
 .typing-bubble {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.85rem 1.25rem;
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  border-bottom-left-radius: 4px;
+  gap: 12px;
 }
 
-[data-theme="dark"] .typing-bubble {
-  background-color: #1e1e1e;
-  border-color: #2a2a2a;
+.error-message-content {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+[data-theme="dark"] .error-message-content {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.error-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ef4444;
 }
 
 .typing-dots {
