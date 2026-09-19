@@ -1,5 +1,5 @@
-import { auth } from './firebase-config.js';
-import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { auth } from './firebase-init.js';
+import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   const signupForm = document.getElementById('signup-form');
@@ -19,42 +19,71 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmPassword = confirmPasswordInput ? confirmPasswordInput.value : '';
     const errorEl = document.getElementById('error-message');
     const successEl = document.getElementById('success-message');
+    const submitBtn = document.getElementById('btn-signup-submit');
+    const btnSpinner = submitBtn ? submitBtn.querySelector('.btn-spinner') : null;
 
     if (errorEl) errorEl.textContent = '';
     if (successEl) successEl.textContent = '';
 
     if (!name || !email || !password || !confirmPassword) {
-      if (errorEl) errorEl.textContent = 'সব ফিল্ড পূরণ করুন';
+      if (errorEl) errorEl.textContent = 'Please fill in all required fields.';
       return;
     }
 
     if (password !== confirmPassword) {
-      if (errorEl) errorEl.textContent = 'পাসওয়ার্ড মিলছে না';
+      if (errorEl) errorEl.textContent = 'Passwords do not match.';
       return;
     }
 
     if (password.length < 6) {
-      if (errorEl) errorEl.textContent = 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে';
+      if (errorEl) errorEl.textContent = 'Password must be at least 6 characters long.';
       return;
     }
 
     try {
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnSpinner) btnSpinner.classList.remove('hidden');
+
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(userCredential.user, { displayName: name });
-      if (successEl) successEl.textContent = 'অ্যাকাউন্ট তৈরি হয়েছে! রিডাইরেক্ট হচ্ছে...';
-      setTimeout(() => window.location.href = '../profile/', 1500);
+      if (name) {
+        await updateProfile(userCredential.user, { displayName: name });
+      }
+
+      if (successEl) successEl.textContent = 'Account created successfully! Redirecting...';
+
+      const pathname = window.location.pathname;
+      const isRoot = pathname.endsWith('/') && pathname.split('/').filter(Boolean).length === 0;
+      const redirectPath = isRoot ? 'profile/' : '../profile/';
+
+      setTimeout(() => {
+        window.location.href = redirectPath;
+      }, 1000);
     } catch (error) {
       if (errorEl) {
-        if (error.code === 'auth/email-already-in-use') {
-          errorEl.textContent = 'এই ইমেইল দিয়ে আগেই অ্যাকাউন্ট আছে';
-        } else if (error.code === 'auth/invalid-email') {
-          errorEl.textContent = 'ইমেইল ঠিক নেই';
-        } else if (error.code === 'auth/weak-password') {
-          errorEl.textContent = 'পাসওয়ার্ড দুর্বল';
-        } else {
-          errorEl.textContent = 'সমস্যা হয়েছে: ' + error.message;
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            errorEl.textContent = 'An account with this email address already exists.';
+            break;
+          case 'auth/invalid-email':
+            errorEl.textContent = 'Please enter a valid email address.';
+            break;
+          case 'auth/weak-password':
+            errorEl.textContent = 'The password provided is too weak. Please use at least 6 characters.';
+            break;
+          case 'auth/operation-not-allowed':
+            errorEl.textContent = 'Email/password sign-in is not enabled. Please contact support.';
+            break;
+          case 'auth/network-request-failed':
+            errorEl.textContent = 'Network error. Please check your internet connection.';
+            break;
+          default:
+            errorEl.textContent = 'Failed to create account. Please try again.';
+            break;
         }
       }
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+      if (btnSpinner) btnSpinner.classList.add('hidden');
     }
   });
 });

@@ -1,21 +1,27 @@
-import { auth } from './firebase-config.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { auth } from './firebase-init.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 onAuthStateChanged(auth, (user) => {
   const loginBtn = document.getElementById('login-btn');
   const userMenu = document.getElementById('user-menu');
-  const userName = document.getElementById('user-name');
-  const userAvatar = document.getElementById('user-avatar');
+  const userNameElements = document.querySelectorAll('#user-name, #user-name-nav');
+  const userAvatarElements = document.querySelectorAll('#user-avatar, #user-avatar-nav');
 
   if (user) {
-    // লগইন করা আছে
     if (loginBtn) loginBtn.style.display = 'none';
     if (userMenu) userMenu.style.display = 'flex';
-    const displayName = user.displayName || user.email;
-    if (userName) userName.textContent = displayName;
-    if (userAvatar) userAvatar.textContent = (displayName || 'U')[0].toUpperCase();
+
+    const displayName = user.displayName || user.email || 'User';
+    const initial = (displayName ? displayName[0] : 'U').toUpperCase();
+
+    userNameElements.forEach(el => {
+      el.textContent = displayName;
+    });
+
+    userAvatarElements.forEach(el => {
+      el.textContent = initial;
+    });
   } else {
-    // লগইন করা নেই
     if (loginBtn) loginBtn.style.display = 'inline-flex';
     if (userMenu) userMenu.style.display = 'none';
   }
