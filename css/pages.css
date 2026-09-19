@@ -3107,3 +3107,35 @@ body.ai-page .site-footer {
     font-size: 2rem;
   }
 }
+
+/* Profile Page Styles */
+.profile-menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0.5rem;
+  color: var(--text-main);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition-fast);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+}
+
+.profile-menu-link:last-child {
+  border-bottom: none;
+}
+
+.profile-menu-link:hover {
+  color: var(--primary-500);
+  background: var(--bg-surface-hover);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.pref-theme-btn.active {
+  background-color: var(--primary-500) !important;
+  color: #ffffff !important;
+  border-color: var(--primary-500) !important;
+}
