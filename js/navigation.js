@@ -14,7 +14,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Theme Dropdown Toggle
+  // Three-Dot Menu Toggle
+  const threeDotBtn = document.getElementById('three-dot-toggle');
+  const threeDotDropdown = document.getElementById('three-dot-dropdown');
+
+  if (threeDotBtn && threeDotDropdown) {
+    threeDotBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = threeDotBtn.getAttribute('aria-expanded') === 'true';
+      threeDotBtn.setAttribute('aria-expanded', !isExpanded);
+      threeDotDropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!threeDotBtn.contains(e.target) && !threeDotDropdown.contains(e.target)) {
+        threeDotDropdown.classList.remove('show');
+        threeDotBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Theme Pill Option Handlers (inside three-dot dropdown or standalone)
+  document.addEventListener('click', (e) => {
+    const themePill = e.target.closest('.theme-option-pill, .theme-option-btn');
+    if (themePill) {
+      const selectedTheme = themePill.getAttribute('data-theme-val');
+      if (window.ThemeController && selectedTheme) {
+        window.ThemeController.setTheme(selectedTheme);
+      }
+    }
+  });
+
+  // Close three-dot dropdown when clicking menu items (links / logout buttons)
+  if (threeDotDropdown) {
+    threeDotDropdown.addEventListener('click', (e) => {
+      const linkOrAction = e.target.closest('a, button:not(.theme-option-pill)');
+      if (linkOrAction) {
+        threeDotDropdown.classList.remove('show');
+        if (threeDotBtn) threeDotBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Legacy Theme Dropdown Support (if present on older layouts)
   const themeBtn = document.getElementById('theme-toggle-btn');
   const themeDropdown = document.getElementById('theme-dropdown');
 
@@ -31,19 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         themeDropdown.classList.remove('show');
         themeBtn.setAttribute('aria-expanded', 'false');
       }
-    });
-
-    // Option buttons selection
-    const optionBtns = themeDropdown.querySelectorAll('.theme-option-btn');
-    optionBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const selectedTheme = btn.getAttribute('data-theme-val');
-        if (window.ThemeController) {
-          window.ThemeController.setTheme(selectedTheme);
-        }
-        themeDropdown.classList.remove('show');
-        themeBtn.setAttribute('aria-expanded', 'false');
-      });
     });
   }
 
