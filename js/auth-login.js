@@ -1,5 +1,5 @@
-import { auth } from './firebase-config.js';
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { auth } from './firebase-init.js';
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
@@ -14,29 +14,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = emailInput ? emailInput.value.trim() : '';
     const password = passwordInput ? passwordInput.value : '';
     const errorEl = document.getElementById('error-message');
+    const submitBtn = document.getElementById('btn-login-submit');
+    const btnSpinner = submitBtn ? submitBtn.querySelector('.btn-spinner') : null;
 
     if (errorEl) errorEl.textContent = '';
 
     if (!email || !password) {
-      if (errorEl) errorEl.textContent = 'ইমেইল ও পাসওয়ার্ড দিন';
+      if (errorEl) errorEl.textContent = 'Please enter both email and password.';
       return;
     }
 
     try {
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnSpinner) btnSpinner.classList.remove('hidden');
+
       await signInWithEmailAndPassword(auth, email, password);
-      window.location.href = '../profile/';
+
+      const pathname = window.location.pathname;
+      const isRoot = pathname.endsWith('/') && pathname.split('/').filter(Boolean).length === 0;
+      const redirectPath = isRoot ? './' : '../';
+
+      window.location.href = redirectPath;
     } catch (error) {
       if (errorEl) {
-        if (error.code === 'auth/user-not-found') {
-          errorEl.textContent = 'এই ইমেইল দিয়ে অ্যাকাউন্ট নেই';
-        } else if (error.code === 'auth/wrong-password') {
-          errorEl.textContent = 'পাসওয়ার্ড ভুল';
-        } else if (error.code === 'auth/invalid-credential') {
-          errorEl.textContent = 'ইমেইল বা পাসওয়ার্ড ভুল';
-        } else {
-          errorEl.textContent = 'লগইন ব্যর্থ: ' + error.message;
+        switch (error.code) {
+          case 'auth/invalid-credential':
+          case 'auth/user-not-found':
+          case 'auth/wrong-password':
+            errorEl.textContent = 'Invalid email or password. Please check your credentials.';
+            break;
+          case 'auth/invalid-email':
+            errorEl.textContent = 'Please enter a valid email address.';
+            break;
+          case 'auth/user-disabled':
+            errorEl.textContent = 'This account has been disabled.';
+            break;
+          case 'auth/too-many-requests':
+            errorEl.textContent = 'Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.';
+            break;
+          case 'auth/operation-not-allowed':
+            errorEl.textContent = 'Email/password sign-in is not enabled in Firebase Console.';
+            break;
+          case 'auth/network-request-failed':
+            errorEl.textContent = 'Network error. Please check your internet connection.';
+            break;
+          default:
+            errorEl.textContent = 'Failed to sign in. Please try again.';
+            break;
         }
       }
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+      if (btnSpinner) btnSpinner.classList.add('hidden');
     }
   });
 });
