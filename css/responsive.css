@@ -116,30 +116,26 @@
   }
 
   .navbar {
-    height: 4rem;
+    height: 3.75rem;
   }
 
   .brand-logo img {
-    height: 2.25rem;
+    height: 2.1rem;
   }
 
-  .nav-menu {
-    position: fixed;
-    top: 4rem;
-    left: 0;
-    right: 0;
-    background-color: var(--bg-surface);
-    border-bottom: 1px solid var(--border-color);
-    flex-direction: column;
-    padding: 1.5rem;
-    gap: 1.25rem;
-    box-shadow: var(--shadow-lg);
-    display: none;
-    z-index: 99;
+  .three-dot-btn {
+    width: 2rem;
+    height: 2rem;
   }
 
-  .nav-menu.show {
-    display: flex;
+  .three-dot-dropdown {
+    width: 210px;
+  }
+
+  .top-profile-btn {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.8rem;
   }
 
   .grid-3, .grid-2, .contact-grid, .why-contact-grid {
