@@ -16,11 +16,16 @@ onAuthStateChanged(auth, (user) => {
     if (loginBtn) loginBtn.style.display = 'none';
     if (userMenu) userMenu.style.display = 'flex';
 
-    const displayName = user.displayName || user.email || 'User';
-    const initial = (displayName ? displayName[0] : 'U').toUpperCase();
+    const rawDisplayName = user.displayName || user.email || 'User';
+    // If displayName contains space or email domain, get clean first name
+    let firstName = rawDisplayName.trim().split(' ')[0];
+    if (firstName.includes('@')) {
+      firstName = firstName.split('@')[0];
+    }
+    const initial = (firstName ? firstName[0] : 'U').toUpperCase();
 
     userNameElements.forEach(el => {
-      el.textContent = displayName;
+      el.textContent = firstName;
     });
 
     userAvatarElements.forEach(el => {
