@@ -90,7 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
   bottomNavItems.forEach(item => {
     const itemPath = normalizePath(item.pathname);
+    const isProfileSection = ['/profile', '/settings', '/login', '/signup'].includes(currentNormalized);
+    const isItemProfile = itemPath === '/profile' || itemPath === '/login';
+
     if (itemPath === currentNormalized || (currentNormalized.startsWith(itemPath) && itemPath !== '/')) {
+      item.classList.add('active');
+    } else if (isProfileSection && isItemProfile) {
       item.classList.add('active');
     }
   });
