@@ -116,7 +116,7 @@
       selectedModel = saved;
     }
     if (currentModelLabel) {
-      currentModelLabel.textContent = selectedModel;
+      currentModelLabel.textContent = 'AI Assistant';
     }
     // Set active class in model dropdown items
     document.querySelectorAll('.model-option-item').forEach(item => {
@@ -252,7 +252,7 @@
           e.stopPropagation();
           selectedModel = item.getAttribute('data-model') || 'Gemini 2.5 Flash';
           localStorage.setItem(MODEL_STORAGE_KEY, selectedModel);
-          if (currentModelLabel) currentModelLabel.textContent = selectedModel;
+          if (currentModelLabel) currentModelLabel.textContent = 'AI Assistant';
           document.querySelectorAll('.model-option-item').forEach(m => m.classList.remove('active'));
           item.classList.add('active');
           modelDropdownMenu.classList.remove('show');
@@ -768,14 +768,19 @@
         `;
       } else if (msg.isError) {
         bubbleEl.innerHTML = `
-          <div class="avatar">🤖</div>
+          <div class="avatar ai-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/></svg>
+          </div>
           <div class="message-content error-message-content">
             <div class="message-text error-text">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               <span>${window.AIFormatter ? window.AIFormatter.escapeHtml(msg.content) : msg.content}</span>
             </div>
             <div class="message-actions">
-              <button type="button" class="action-btn retry-btn" title="Retry">🔄 Retry</button>
+              <button type="button" class="action-btn retry-btn" title="Retry">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                <span>Retry</span>
+              </button>
             </div>
           </div>
         `;
@@ -796,17 +801,26 @@
         let regenerateMarkup = '';
         if (isLatestAssistant) {
           regenerateMarkup = `
-            <button type="button" class="action-btn regenerate-btn" title="Regenerate">🔄</button>
+            <button type="button" class="action-btn regenerate-btn" title="Regenerate">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            </button>
           `;
         }
 
         bubbleEl.innerHTML = `
-          <div class="avatar">🤖</div>
+          <div class="avatar ai-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/></svg>
+          </div>
           <div class="message-content">
             <div class="message-text markdown-body">${formattedHtml}</div>
-            <div class="message-disclaimer">ℹ️ AI can make mistakes.</div>
+            <div class="message-disclaimer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span>AI can make mistakes. Verify important info.</span>
+            </div>
             <div class="message-actions">
-              <button type="button" class="action-btn copy-btn" title="Copy">📋</button>
+              <button type="button" class="action-btn copy-btn" title="Copy text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
               ${regenerateMarkup}
             </div>
           </div>
@@ -817,10 +831,10 @@
         if (copyBtn) {
           copyBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(msg.content).then(() => {
-              copyBtn.textContent = '✅';
+              copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
               copyBtn.classList.add('copied');
               setTimeout(() => {
-                copyBtn.textContent = '📋';
+                copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
                 copyBtn.classList.remove('copied');
               }, 2000);
             });
@@ -850,7 +864,9 @@
       typingEl.id = 'typing-indicator-row';
       typingEl.className = 'message ai-message typing-indicator-message';
       typingEl.innerHTML = `
-        <div class="avatar">🤖</div>
+        <div class="avatar ai-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="16" y1="16" x2="16.01" y2="16"/></svg>
+        </div>
         <div class="message-content typing-bubble">
           <div class="typing-dots">
             <span class="dot"></span>
