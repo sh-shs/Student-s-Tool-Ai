@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Tools Library — Student's Tool & AI</title>
-  <meta name="description" content="Explore and search our comprehensive library of student tools, calculators, timers, text converters, image processing utilities, and productivity helpers.">
+  <meta name="description" content="Explore and search our comprehensive library of 205 student tools, calculators, timers, text converters, physics, finance, developer utilities, and productivity helpers.">
   <link rel="icon" type="image/png" href="../assets/images/logo.png">
 
   <!-- CSS Stylesheets -->
@@ -108,9 +108,9 @@
   <main class="section">
     <div class="container">
       <div class="section-header">
-        <div class="section-subtitle">Comprehensive Library</div>
-        <h1 class="section-title">Student Tools & Calculators</h1>
-        <p class="section-desc">Search and filter fast, accurate, and free academic utilities designed to elevate your study productivity.</p>
+        <div class="section-subtitle">Comprehensive Platform</div>
+        <h1 class="section-title">Student Tools & Utility Library</h1>
+        <p class="section-desc">Search and filter 205 fast, accurate, and free student utilities designed to elevate your academic success.</p>
       </div>
 
       <!-- Stats Banner Section -->
@@ -118,15 +118,15 @@
         <div class="stat-item">
           <div class="stat-icon-wrapper" style="background: var(--cat-academic-bg); color: var(--cat-academic-color);">⚡</div>
           <div>
-            <div class="stat-info-num">34+ Tools</div>
+            <div class="stat-info-num" id="stat-total-tools-num">205 Tools</div>
             <div class="stat-info-label">Free & Instant Utilities</div>
           </div>
         </div>
         <div class="stat-item">
           <div class="stat-icon-wrapper" style="background: var(--cat-math-bg); color: var(--cat-math-color);">🎓</div>
           <div>
-            <div class="stat-info-num">7 Categories</div>
-            <div class="stat-info-label">Academic, Math & More</div>
+            <div class="stat-info-num" id="stat-total-cats-num">10 Categories</div>
+            <div class="stat-info-label">Academic, Math, Physics, Tech & More</div>
           </div>
         </div>
         <div class="stat-item">
@@ -142,18 +142,22 @@
       <div class="tools-filter-wrapper">
         <div class="tools-search-box">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="tools-search-input" class="form-control" placeholder="Search from 34+ tools..." aria-label="Search student tools">
+          <input type="text" id="tools-search-input" class="form-control" placeholder="Search across 205 tools..." aria-label="Search student tools">
         </div>
 
         <div class="category-pills" id="category-filter-container">
           <button class="filter-btn active" data-category="All">🌐 All Tools</button>
           <button class="filter-btn" data-category="Academic">📘 Academic</button>
           <button class="filter-btn" data-category="Math">🧮 Math</button>
+          <button class="filter-btn" data-category="Geometry">📐 Geometry</button>
+          <button class="filter-btn" data-category="Physics & Electronics">⚡ Physics & Electronics</button>
+          <button class="filter-btn" data-category="Finance">💰 Finance</button>
           <button class="filter-btn" data-category="Time & Date">⏰ Time & Date</button>
           <button class="filter-btn" data-category="Productivity">⚡ Productivity</button>
-          <button class="filter-btn" data-category="Text">📝 Text</button>
+          <button class="filter-btn" data-category="Text & Writing">📝 Text & Writing</button>
+          <button class="filter-btn" data-category="Developer / Computer">🖥️ Developer / Computer</button>
           <button class="filter-btn" data-category="Image & File">🖼️ Image & File</button>
-          <button class="filter-btn" data-category="Other">🔧 Other</button>
+          <button class="filter-btn" data-category="Security & Utility">🛡️ Security & Utility</button>
           <button class="filter-btn" data-category="Favorites">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             Favorites
