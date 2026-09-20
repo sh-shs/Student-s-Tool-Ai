@@ -7,10 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const categoryContainer = document.getElementById('category-filter-container');
   const noToolsMessage = document.getElementById('no-tools-message');
   const toolsCountLabel = document.getElementById('tools-count-label');
+  const statTotalToolsNum = document.getElementById('stat-total-tools-num');
+  const statTotalCatsNum = document.getElementById('stat-total-cats-num');
 
   // Track state
   let currentCategory = 'All';
   let searchQuery = '';
+
+  // Update dynamic total statistics if elements exist on page
+  if (statTotalToolsNum && window.STUDENT_TOOLS) {
+    statTotalToolsNum.textContent = `${window.STUDENT_TOOLS.length} Tools`;
+  }
 
   if (!toolsGrid) {
     // We might be on an individual tool page. Auto-track recent if on a tool page.
@@ -79,7 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (currentCategory === 'Recently Used') {
         if (!recents.includes(tool.id)) return false;
       } else if (currentCategory !== 'All') {
-        if (!tool.categories.includes(currentCategory)) return false;
+        const matchesCategory = tool.categories.some(c => {
+          if (currentCategory === 'Text & Writing' || currentCategory === 'Text') {
+            return c === 'Text & Writing' || c === 'Text';
+          }
+          if (currentCategory === 'Developer / Computer' || currentCategory === 'Developer') {
+            return c === 'Developer / Computer' || c === 'Developer';
+          }
+          return c === currentCategory;
+        });
+        if (!matchesCategory) return false;
       }
 
       // Search query check
@@ -126,10 +142,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const getBadgeClass = (cat) => {
       switch (cat) {
         case 'Academic': return 'badge-academic';
-        case 'Math': return 'badge-math';
+        case 'Math':
+        case 'Geometry': return 'badge-math';
         case 'Time & Date': return 'badge-time';
-        case 'Productivity': return 'badge-prod';
-        case 'Text': return 'badge-text';
+        case 'Productivity':
+        case 'Physics & Electronics': return 'badge-prod';
+        case 'Text':
+        case 'Text & Writing': return 'badge-text';
         case 'Image & File': return 'badge-image';
         default: return 'badge-other';
       }
