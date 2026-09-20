@@ -158,10 +158,14 @@ main {
 
 /* Site Footer */
 .site-footer {
-  background-color: var(--bg-surface);
+  background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(240, 249, 255, 0.4) 100%);
   border-top: 1px solid var(--border-color);
   padding: 3.5rem 0 2rem 0;
   margin-top: 4rem;
+}
+
+[data-theme="dark"] .site-footer {
+  background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(11, 19, 43, 0.95) 100%);
 }
 
 .footer-grid {
