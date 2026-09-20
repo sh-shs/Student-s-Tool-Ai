@@ -1166,24 +1166,36 @@ body.ai-page .site-footer {
 
 .top-bar-center {
   flex: 1;
-}
-
-.top-profile-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0ea5e9, #10b981);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
-.top-profile-avatar:hover {
-  transform: scale(1.08);
+/* Slim Header Status Badge */
+.ai-header-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-muted);
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-dot.green-dot {
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
 }
 
 /* Chat Body Container */
@@ -1211,27 +1223,32 @@ body.ai-page .site-footer {
 
 /* Claude Greeting Section */
 .claude-greeting-section {
-  padding: 3.5rem 1.5rem 2rem 1.5rem;
+  padding: 2rem 1.5rem;
   text-align: center;
   margin: auto;
   max-width: 44rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .greeting-header-box {
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .greeting-time-title {
   font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--text-main);
+  font-weight: 800;
   letter-spacing: -0.025em;
   margin-bottom: 0.5rem;
 }
 
-[data-theme="dark"] .greeting-time-title {
-  color: #ffffff;
+.greeting-time-title.gradient-brand-text {
+  background: var(--text-gradient-blue-green);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .greeting-subtitle {
@@ -1246,7 +1263,7 @@ body.ai-page .site-footer {
 
 /* Quick Action Buttons (2 rows on mobile) */
 .quick-actions-wrapper {
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
 }
 
 .quick-actions-grid {
@@ -1260,17 +1277,17 @@ body.ai-page .site-footer {
 .quick-action-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.1rem;
-  border-radius: 9999px;
+  gap: 0.65rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-full);
   background-color: var(--bg-surface-elevated);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 
 [data-theme="dark"] .quick-action-btn {
@@ -1280,15 +1297,24 @@ body.ai-page .site-footer {
 }
 
 .quick-action-btn:hover {
-  border-color: #0ea5e9;
-  background-color: rgba(14, 165, 233, 0.1);
-  color: #0ea5e9;
+  border-color: var(--border-brand);
+  background-color: var(--bg-accent-subtle);
+  color: var(--primary-400);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .action-icon {
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.action-icon.icon-blue { color: #2563eb; }
+.action-icon.icon-emerald { color: #10b981; }
+.action-icon.icon-purple { color: #9333ea; }
+.action-icon.icon-amber { color: #f59e0b; }
+.action-icon.icon-sky { color: #0ea5e9; }
 
 /* Chat Message Styling (ChatGPT / Claude Style Premium Design) */
 .message {
@@ -1323,12 +1349,17 @@ body.ai-page .site-footer {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0EA5E9, #10B981);
+  background: var(--brand-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   font-size: 16px;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.avatar.ai-avatar svg {
   color: #ffffff;
 }
 
@@ -1360,45 +1391,45 @@ body.ai-page .site-footer {
 }
 
 .message-disclaimer {
-  font-size: 11px;
-  color: #888;
-  margin-top: 8px;
-}
-
-[data-theme="dark"] .message-disclaimer {
-  color: #888;
+  font-size: 0.725rem;
+  color: var(--text-subtle);
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .message-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .action-btn {
   background: transparent;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 6px;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 14px;
-  color: #666;
+  font-size: 0.8rem;
+  color: var(--text-muted);
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-[data-theme="dark"] .action-btn {
-  color: #AAAAAA;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
 }
 
 .action-btn:hover {
-  background: rgba(0,0,0,0.05);
+  background: var(--bg-muted);
+  border-color: var(--border-color);
+  color: var(--text-main);
 }
 
 [data-theme="dark"] .action-btn:hover {
-  background: rgba(255,255,255,0.1);
+  background: #262626;
+  border-color: #333333;
+  color: #ffffff;
 }
 
 .message-time {
@@ -1706,7 +1737,7 @@ body.ai-page .site-footer {
 }
 
 .chat-send-btn.claude-send-btn {
-  background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+  background: var(--brand-gradient);
   border: none;
   color: #ffffff;
   width: 34px;
@@ -1717,18 +1748,20 @@ body.ai-page .site-footer {
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 .chat-send-btn.claude-send-btn:hover:not(:disabled) {
+  background: var(--brand-gradient-hover);
   transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
 }
 
 .chat-send-btn.claude-send-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  background: var(--text-muted);
+  background: var(--text-subtle);
   box-shadow: none;
 }
 

@@ -175,7 +175,7 @@
             <ul class="pinned-chat-list" id="pinned-chat-list">
               <li class="history-item pinned-item">
                 <div class="history-item-left">
-                  <span class="pin-icon">📌</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5M9 2h6l1 7h-8z"/></svg>
                   <span class="history-text">Study Plan &amp; Formulas</span>
                 </div>
               </li>
@@ -193,7 +193,9 @@
           <!-- Sidebar Bottom User Profile & Settings -->
           <div class="sidebar-footer">
             <a href="../profile/index.html" class="sidebar-user-profile">
-              <div class="user-avatar-sm">👤</div>
+              <div class="user-avatar-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
               <div class="user-info-text">
                 <span class="user-name">Student User</span>
                 <span class="user-plan">Pro Member</span>
@@ -209,29 +211,32 @@
         <!-- Main Workspace / Chat Card Container -->
         <div class="ai-chat-card" id="chat-container">
 
-          <!-- Top Bar (Claude Style: Left Sidebar Toggle, Right Profile Avatar, Clean Middle) -->
+          <!-- Top Bar (Left Hamburger, Slim Status Header Middle, Right Actions + Avatar) -->
           <div class="ai-top-bar" id="ai-top-bar">
             <div class="top-bar-left">
-              <button type="button" class="sidebar-toggle-btn" id="sidebar-toggle-btn" title="Toggle Sidebar" aria-label="Toggle Sidebar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              <button type="button" class="btn btn-secondary btn-icon-only" id="sidebar-toggle-btn" title="Toggle Sidebar" aria-label="Toggle Sidebar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
               </button>
             </div>
 
             <div class="top-bar-center">
-              <!-- Clean / empty as required -->
+              <div class="ai-header-status-badge">
+                <span class="status-dot green-dot"></span>
+                <span class="status-text">AI Study Assistant</span>
+              </div>
             </div>
 
             <div class="top-bar-right">
               <button type="button" class="btn btn-secondary btn-sm" id="new-chat-btn" title="Start a new conversation">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>New Chat</span>
               </button>
               <button type="button" class="btn btn-outline btn-sm" id="clear-chat-btn" title="Clear current chat log">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
                 <span>Clear</span>
               </button>
-              <a href="../profile/index.html" class="top-profile-avatar" title="User Profile" aria-label="User Profile">
-                <span>👤</span>
+              <a href="../profile/index.html" class="top-profile-btn default-avatar" id="top-profile-shortcut" aria-label="Profile" title="User Profile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </a>
             </div>
           </div>
@@ -239,38 +244,48 @@
           <!-- Chat Body Container -->
           <div class="ai-chat-body">
 
-            <!-- Claude Style Greeting Section (Shown when empty) -->
+            <!-- Empty State Greeting & Suggestion Chips Section -->
             <div class="ai-empty-state claude-greeting-section" id="chat-empty-state">
               <div class="greeting-header-box">
-                <h1 class="greeting-time-title" id="greeting-title">Good afternoon, Student</h1>
+                <h1 class="greeting-time-title gradient-brand-text" id="greeting-title">Good afternoon, Student</h1>
                 <p class="greeting-subtitle">How can I help you today?</p>
               </div>
 
-              <!-- Claude Quick Action Buttons -->
+              <!-- Line-Icon Quick Suggestion Chips -->
               <div class="quick-actions-wrapper">
                 <div class="quick-actions-grid">
                   <button type="button" class="quick-action-btn" data-prompt="Help me write a clear and concise essay structure for my paper.">
-                    <span class="action-icon">✏️</span>
+                    <span class="action-icon icon-blue">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </span>
                     <span class="action-label">Write</span>
                   </button>
 
                   <button type="button" class="quick-action-btn" data-prompt="Explain a complex concept in simple terms so I can learn effectively.">
-                    <span class="action-icon">🎓</span>
+                    <span class="action-icon icon-emerald">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    </span>
                     <span class="action-label">Learn</span>
                   </button>
 
                   <button type="button" class="quick-action-btn" data-prompt="Help me write, fix, or optimize my code logic step-by-step.">
-                    <span class="action-icon">&lt;/&gt;</span>
+                    <span class="action-icon icon-purple">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </span>
                     <span class="action-label">Code</span>
                   </button>
 
                   <button type="button" class="quick-action-btn" data-prompt="Give me productivity and daily life planning advice for students.">
-                    <span class="action-icon">☕</span>
+                    <span class="action-icon icon-amber">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                    </span>
                     <span class="action-label">Life stuff</span>
                   </button>
 
                   <button type="button" class="quick-action-btn" data-prompt="Surprise me with a useful study topic or creative project idea.">
-                    <span class="action-icon">💡</span>
+                    <span class="action-icon icon-sky">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.7 1.3 1.5 1.5 2.5z"/></svg>
+                    </span>
                     <span class="action-label">AI's choice</span>
                   </button>
                 </div>
@@ -327,12 +342,19 @@
                 <!-- Mode Selector Dropdown (Chat, Cowork) -->
                 <div class="mode-selector-wrapper">
                   <button type="button" class="mode-selector-btn" id="mode-selector-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     <span id="current-mode-label">Chat</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                   </button>
                   <div class="mode-dropdown-menu" id="mode-dropdown-menu">
-                    <button type="button" class="mode-option-item active" data-mode="Chat">💬 Chat Mode</button>
-                    <button type="button" class="mode-option-item" data-mode="Cowork">🤝 Cowork Mode</button>
+                    <button type="button" class="mode-option-item active" data-mode="Chat">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      <span>Chat Mode</span>
+                    </button>
+                    <button type="button" class="mode-option-item" data-mode="Cowork">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                      <span>Cowork Mode</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -343,34 +365,34 @@
               <!-- Right Control Icons inside Input Box -->
               <div class="input-box-right">
                 <button type="button" class="input-icon-btn voice-btn" id="voice-input-btn" title="Voice Input" aria-label="Voice Input">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
                 </button>
                 <button type="button" class="input-icon-btn waveform-btn" id="waveform-btn" title="Audio Waveform" aria-label="Audio Waveform">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10v4"/><path d="M6 6v12"/><path d="M10 3v18"/><path d="M14 8v8"/><path d="M18 5v14"/><path d="M22 10v4"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v4"/><path d="M6 6v12"/><path d="M10 3v18"/><path d="M14 8v8"/><path d="M18 5v14"/><path d="M22 10v4"/></svg>
                 </button>
                 <button type="button" class="chat-send-btn claude-send-btn" id="chat-send-btn" title="Send Message" aria-label="Send Message" disabled>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
                 </button>
               </div>
 
             </div>
 
-            <!-- Below Input Box: Model Selector Dropdown -->
+            <!-- Below Input Box: Model Selector Dropdown (Rebranded to "AI Assistant") -->
             <div class="model-selector-container">
               <div class="model-dropdown-wrapper">
                 <button type="button" class="model-selector-btn" id="model-selector-btn">
                   <span class="model-dot"></span>
-                  <span id="current-model-label">Gemini 2.5 Flash</span>
+                  <span id="current-model-label">AI Assistant</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
                 <div class="model-dropdown-menu" id="model-dropdown-menu">
                   <button type="button" class="model-option-item active" data-model="Gemini 2.5 Flash">
-                    <div class="model-item-title">Gemini 2.5 Flash</div>
-                    <div class="model-item-desc">Fast, responsive &amp; balanced for general tasks</div>
+                    <div class="model-item-title">Standard Engine</div>
+                    <div class="model-item-desc">Fast, responsive &amp; balanced for general study tasks</div>
                   </button>
                   <button type="button" class="model-option-item" data-model="Gemini 3.6 Flash">
-                    <div class="model-item-title">Gemini 3.6 Flash</div>
-                    <div class="model-item-desc">Next-gen high speed reasoning &amp; code analysis</div>
+                    <div class="model-item-title">Advanced Reasoning Engine</div>
+                    <div class="model-item-desc">High speed reasoning, complex problem solving &amp; code analysis</div>
                   </button>
                 </div>
               </div>

@@ -80,6 +80,13 @@
   font-size: 0.85rem;
 }
 
+.btn-icon-only {
+  padding: 0.45rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+}
+
 /* Three-Dot Dropdown Menu */
 .three-dot-dropdown {
   position: absolute;
